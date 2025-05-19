@@ -1,4 +1,5 @@
 import { NavLink, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom"
 
 export const Program = () => {
   const location = useLocation();
@@ -9,6 +10,9 @@ export const Program = () => {
   return (
     <div className="program">
       <NavLink to={{ pathname: "/result", search: `?id=${id}&name=${name}` }}>結果</NavLink>
+      <Link to="/result" state={{ state: ["Success"] }}>
+        結果ページへ(ここのコメントアウト外して「結果ページへ」の方のリンクを押すとResultページにstate: ["Success"]が表示されます)
+      </Link>
       <h1>プログラミング</h1>
     </div>
   );
