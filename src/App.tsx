@@ -2,7 +2,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import './App.css';
 import { Pnf } from "./pages/Pnf";
-import { Program } from "./pages/Program";
+import Program from "./pages/Program";
 import { Result } from "./pages/Result";
 import { Select } from "./pages/Select";
 
