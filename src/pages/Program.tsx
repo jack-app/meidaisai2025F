@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { NavLink, useLocation } from "react-router-dom";
+// import { useBodyScrollLock } from "../hooks/useBodyScrollLock"
 
 export const Game = () => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -7,6 +8,9 @@ export const Game = () => {
   const [bullets, setBullets] = useState<Array<{ x: number; y: number }>>([]);
   const [enemies, setEnemies] = useState<Array<{ x: number; y: number }>>([]);
   const [score, setScore] = useState(0);
+  const [refreshKey, setRefreshKey] = useState(0);
+  const [gameOver, setGameOver] = useState(false);
+  // (ゲーム再スタート用の refreshKey を更新すると useEffect 内の処理が再実行されます)
 
   // 最新状態を保持する ref
   const playerXRef = useRef(playerX);
@@ -15,13 +19,23 @@ export const Game = () => {
   // 矢印キーの押下状況を保持する ref
   const leftPressedRef = useRef(false);
   const rightPressedRef = useRef(false);
+  // useRef を利用して enemySpawner のタイマーID を保持
+  const enemySpawnerRef = useRef<number | null>(null);
 
   const width = 400;
-  const height = 600;
+  const height = 400;
   const playerWidth = 20;
   const speed = 5; // 移動速度
 
-  // state 更新後に対応する ref を更新
+  // reset 用の useEffect：refreshKeyが変更されたら各 state を初期状態に戻す
+  useEffect(() => {
+    setPlayerX(200);
+    setScore(0);
+    setBullets([]);
+    setEnemies([]);
+    setGameOver(false);
+  }, [refreshKey]);
+
   useEffect(() => {
     playerXRef.current = playerX;
   }, [playerX]);
@@ -33,6 +47,20 @@ export const Game = () => {
   useEffect(() => {
     enemiesRef.current = enemies;
   }, [enemies]);
+
+  // 弾の発射（1秒に1回）
+  useEffect(() => {
+    const bulletInterval = setInterval(() => {
+      setBullets((prev) => [
+        ...prev,
+        { x: playerXRef.current + 8, y: height - 40 },
+      ]);
+    }, 500);
+
+    return () => {
+      clearInterval(bulletInterval);
+    };
+  }, []);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -73,24 +101,34 @@ export const Game = () => {
 
     // 衝突判定を含むゲームループ
     const gameLoop = () => {
-      // 矢印キーの押下状態に応じたプレイヤーの移動
+      // すでにゲームオーバーなら何もしない
+      if (gameOver) return;
+
+      // 矢印キーに応じたプレイヤーの移動
       if (leftPressedRef.current) {
         setPlayerX((prev) => Math.max(0, prev - speed));
       }
       if (rightPressedRef.current) {
-        setPlayerX((prev) =>
-          Math.min(width - playerWidth, prev + speed)
-        );
+        setPlayerX((prev) => Math.min(width - playerWidth, prev + speed));
       }
 
       // 弾の更新（上に移動、画面外除去）
       const updatedBullets = bulletsRef.current
         .map((b) => ({ ...b, y: b.y - 10 }))
         .filter((b) => b.y > 0);
-      // 敵の更新（下に移動、画面外除去）
-      const updatedEnemies = enemiesRef.current
-        .map((e) => ({ ...e, y: e.y + 4 }))
-        .filter((e) => e.y < height);
+
+      // 敵の更新（下に移動）
+      const allEnemiesUpdated = enemiesRef.current.map((e) => ({
+        ...e,
+        y: e.y + 4,
+      }));
+      const updatedEnemies = allEnemiesUpdated.filter((e) => e.y < height);
+      // もし除去された敵があれば出力
+      if (allEnemiesUpdated.length > updatedEnemies.length) {
+        setGameOver(true);
+        return;
+        // console.log("敵が画面外に出ました");
+      }
 
       // 衝突判定（各敵と弾の当たり判定）
       let newBullets = [...updatedBullets];
@@ -118,7 +156,7 @@ export const Game = () => {
       // 描画
       context.clearRect(0, 0, width, height);
       // プレイヤー描画（常に画面下部）
-      context.fillStyle = "black";
+      context.fillStyle = "blue";
       context.fillRect(playerXRef.current, height - 30, playerWidth, 20);
       // 弾描画
       context.fillStyle = "red";
@@ -129,25 +167,48 @@ export const Game = () => {
     };
 
     const interval = setInterval(gameLoop, 30);
+    return () => {
+      clearInterval(interval);
+      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("keyup", handleKeyUp);
+    };
+  }, [gameOver, refreshKey]);
 
-    // 敵を定期的にスポーン
-    const enemySpawner = setInterval(() => {
+  useEffect(() => {
+    // 1秒ごとに敵を逐次スポーン
+    enemySpawnerRef.current = setInterval(() => {
       setEnemies((prev) => [
         ...prev,
         { x: Math.random() * (width - 20), y: 0 },
       ]);
     }, 1000);
 
+    // あるタイミング（例：40秒後）に50匹の敵を同時に発生させ、enemySpawner を停止
+    const spawnAllEnemies = setTimeout(() => {
+      setEnemies((prev) => {
+        const newEnemies = [...prev];
+        for (let i = 0; i < 50; i++) {
+          newEnemies.push({ x: Math.random() * (width - 20), y: 0 });
+        }
+        return newEnemies;
+      });
+      // enemySpawner を停止
+      if (enemySpawnerRef.current) {
+        clearInterval(enemySpawnerRef.current);
+        enemySpawnerRef.current = null;
+      }
+    }, 40000);
+
     return () => {
-      clearInterval(interval);
-      clearInterval(enemySpawner);
-      window.removeEventListener("keydown", handleKeyDown);
-      window.removeEventListener("keyup", handleKeyUp);
+      if (enemySpawnerRef.current) {
+        clearInterval(enemySpawnerRef.current);
+      }
+      clearTimeout(spawnAllEnemies);
     };
-  }, []); // 依存配列は空で1度だけ登録
+  }, [refreshKey]);
 
   return (
-    <div className="flex flex-col items-center mt-4">
+    <div className="relative flex flex-col items-center mt-4">
       <h1 className="text-xl font-bold">Score: {score}</h1>
       <canvas
         ref={canvasRef}
@@ -155,6 +216,33 @@ export const Game = () => {
         height={height}
         className="border mt-2"
       />
+      {gameOver && (
+        <div className="absolute left-1/2 top-[40%] transform -translate-x-1/2 -translate-y-1/2">
+          <h1 className="text-4xl font-bold text-red-600 text-center">
+            Game Over
+          </h1>
+          <canvas
+            ref={canvasRef}
+            width={width}
+            height={200}
+            className="border mt-2"
+          />
+        </div>
+      )}
+      <button
+        type="button"
+        onClick={() => {
+          // 各状態を初期化して再スタート
+          setPlayerX(200);
+          setScore(0);
+          setBullets([]);
+          setEnemies([]);
+          setRefreshKey((prev) => prev + 1);
+        }}
+        className="relative mt-4 p-2 border"
+      >
+        リトライ
+      </button>
     </div>
   );
 };
