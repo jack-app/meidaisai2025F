@@ -102,7 +102,14 @@ export const Game = () => {
     // 衝突判定を含むゲームループ
     const gameLoop = () => {
       // すでにゲームオーバーなら何もしない
-      if (gameOver) return;
+      if (gameOver) {
+  context.fillStyle = "red";
+  context.font = "bold 36px sans-serif";
+  context.textAlign = "center";
+  context.textBaseline = "middle";
+  context.fillText("Game Over", width / 2, height / 2);
+    return;
+  };
 
       // 矢印キーに応じたプレイヤーの移動
       if (leftPressedRef.current) {
@@ -206,46 +213,35 @@ export const Game = () => {
       clearTimeout(spawnAllEnemies);
     };
   }, [refreshKey]);
-
-  return (
-    <div className="relative flex flex-col items-center mt-4">
-      <h1 className="text-xl font-bold">Score: {score}</h1>
+return (
+  <div className="flex flex-col items-center mt-4 relative">
+    <h1 className="text-xl font-bold">Score: {score}</h1>
+    
+    <div className="relative mt-2" style={{ width: width, height: height }}>
       <canvas
         ref={canvasRef}
         width={width}
         height={height}
-        className="border mt-2"
+        className="border block"
       />
-      {gameOver && (
-        <div className="absolute left-1/2 top-[40%] transform -translate-x-1/2 -translate-y-1/2">
-          <h1 className="text-4xl font-bold text-red-600 text-center">
-            Game Over
-          </h1>
-          <canvas
-            ref={canvasRef}
-            width={width}
-            height={200}
-            className="border mt-2"
-          />
-        </div>
-      )}
-      <button
-        type="button"
-        onClick={() => {
-          // 各状態を初期化して再スタート
-          setPlayerX(200);
-          setScore(0);
-          setBullets([]);
-          setEnemies([]);
-          setRefreshKey((prev) => prev + 1);
-        }}
-        className="relative mt-4 p-2 border"
-      >
-        リトライ
-      </button>
     </div>
-  );
-};
+    
+    <button
+      type="button"
+      onClick={() => {
+        setPlayerX(200);
+        setScore(0);
+        setBullets([]);
+        setEnemies([]);
+        setRefreshKey((prev) => prev + 1);
+      }}
+      className="mt-4 p-2 border"
+    >
+      リトライ
+    </button>
+  </div>
+);
+}
 
 export default Game;
 
