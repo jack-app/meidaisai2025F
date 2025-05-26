@@ -1,9 +1,21 @@
-import { useState, useEffect, useRef, } from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { useState, useEffect, useRef } from "react";
+import { useLocation, NavLink } from "react-router-dom";
 import laserGunImg from "../images/レーザー銃.png";
 
 export const Game = () => {
-  const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const location = useLocation();
+  const query = new URLSearchParams(location.search);
+  const id = query.get("id");
+  const name = query.get("name");
+  const die = query.get("die");
+  const rate = query.get("rate");
+  const player = query.get("player");
+  const enemy = query.get("enemy");
+  const beam = query.get("beam");
+  const back = query.get("back");
+  const win = query.get("win");
+  const lose = query.get("lose");
+
   const [playerX, setPlayerX] = useState(200);
   const [bullets, setBullets] = useState<Array<{ x: number; y: number }>>([]);
   const [enemies, setEnemies] = useState<
@@ -19,6 +31,7 @@ export const Game = () => {
   // (ゲーム再スタート用の refreshKey を更新すると useEffect 内の処理が再実行されます)
 
   // 最新状態を保持する ref
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const playerXRef = useRef(playerX);
   const bulletsRef = useRef(bullets);
   const enemiesRef = useRef(enemies);
@@ -37,7 +50,7 @@ export const Game = () => {
   const width = 400;
   const height = 400;
   const playerWidth = 20;
-  const speed = 5;
+  const speed = 10;
 
   // マウント時にレーザー銃画像をロード
   useEffect(() => {
@@ -87,7 +100,8 @@ export const Game = () => {
         y: height - 40,
       }));
       setBullets((prev) => [...prev, ...newBulletsToAdd]);
-    }, 500);
+    }, rate ? parseInt(rate) : 500); // rate があればその値、なければ 500ms
+    // }, rate ? parseInt(rate) : 5);
     return () => clearInterval(bulletInterval);
   }, [bulletSources]);
 
@@ -98,9 +112,9 @@ export const Game = () => {
       const elapsed = Date.now() - startTimeRef.current;
       let hp: number;
       if (elapsed >= 30000 && elapsed < 40000) {
-        hp = Math.floor(Math.random() * 900) + 100; // 100～999
+        hp = Math.floor(Math.random() * 25) + 1; // 100～999
       } else if (elapsed >= 20000 && elapsed < 30000) {
-        hp = Math.floor(Math.random() * 90) + 10; // 10～99
+        hp = Math.floor(Math.random() * 20) + 1; // 10～99
       } else if (elapsed >= 10000 && elapsed < 20000) {
         hp = Math.floor(Math.random() * 8) + 2; // 2～10
       } else {
@@ -111,14 +125,14 @@ export const Game = () => {
 
       setEnemies((prev) => [
         ...prev,
-        { x: Math.random() * (width - 20), y: 0, hp, isLaserGun },
+        { x: Math.random() * (width - 50), y: 0, hp, isLaserGun },
       ]);
     }, 1000);
 
     const spawnAllEnemies = setTimeout(() => {
       setEnemies((prev) => {
         const newEnemies = [...prev];
-        for (let i = 0; i < 50; i++) {
+        for (let i = 0; i < 30; i++) {
           newEnemies.push({
             x: Math.random() * (width - 20),
             y: 0,
@@ -131,7 +145,7 @@ export const Game = () => {
         clearInterval(enemySpawnerRef.current);
         enemySpawnerRef.current = null;
       }
-    }, 40000);
+    }, 39000);
 
     return () => {
       if (enemySpawnerRef.current) {
@@ -225,6 +239,8 @@ export const Game = () => {
       // 衝突判定中の一例
       let localEliminated = 0; // ループ内カウンター
       updatedEnemies.forEach((enemy) => {
+        const dieHp = die ? parseInt(die) : -10; // die が与えられていればその数値、なければ -10
+        // const dieHp = die ? parseInt(die) : 0;
         const hit = newBullets.find(
           (b) =>
             b.x > enemy.x &&
@@ -237,7 +253,7 @@ export const Game = () => {
           // 敵へのダメージ処理
           newBullets = newBullets.filter((b) => b !== hit);
           const updatedEnemy = { ...enemy, hp: enemy.hp - 1 };
-          if (updatedEnemy.hp > 0) {
+          if (updatedEnemy.hp > dieHp) {  // dieHp を使う
             newEnemies.push(updatedEnemy);
           } else {
             // 特殊敵の場合のみ eliminatedCount をアップ（ボーナス）
@@ -264,22 +280,20 @@ export const Game = () => {
       setBullets(newBullets);
       setEnemies(newEnemies);
 
-      // 描画
-      context.clearRect(0, 0, width, height);
-      // 描画前に背景色を設定（例: 薄い青）
-      // context.clearRect(0, 0, width, height);
-      // context.fillStyle = "#808080"; // お好みの色に変更 今はグレー
-      // context.fillRect(0, 0, width, height);
-      // プレイヤー描画（常に画面下部）
-      context.fillStyle = "blue";
+      // 描画前に背景をクリア
+      context.clearRect(0, 0, canvas.width, canvas.height);
+      // context.fillStyle = back ? back : "#808080"; // back があればそれを、なければグレー
+      // context.fillRect(0, 0, canvas.width, canvas.height);
+
+      // プレイヤー描画
+      context.fillStyle = player ? player : "blue";
       context.fillRect(playerXRef.current, height - 40, playerWidth, 30);
       // 弾描画
       context.fillStyle = "red";
       newBullets.forEach((b) => context.fillRect(b.x, b.y, 4, 10));
       // 敵描画
       newEnemies.forEach((e) => {
-        // 敵本体（緑の四角）
-        context.fillStyle = "green";
+        context.fillStyle = enemy ? enemy : "green";
         context.fillRect(e.x, e.y, 30, 30);
         // hp 数字描画
         context.fillStyle = "white";
@@ -292,6 +306,24 @@ export const Game = () => {
           context.drawImage(laserImageRef.current, e.x, e.y - 30, 30, 30);
         }
       });
+
+      // Game Clear / Game Over
+      if (gameClear) {
+        context.fillStyle = "red";
+        context.font = "bold 36px sans-serif";
+        context.textAlign = "center";
+        context.textBaseline = "middle";
+        context.fillText(win ? win : 'Game Clear', width / 2, height / 2);
+        return;
+      }
+      if (gameOver) {
+        context.fillStyle = "red"; 
+        context.font = "bold 36px sans-serif";
+        context.textAlign = "center";
+        context.textBaseline = "middle";
+        context.fillText(lose ? lose : 'Game Over', width / 2, height / 2);
+        return;
+      }
     };
 
     const interval = setInterval(gameLoop, 30);
@@ -303,42 +335,53 @@ export const Game = () => {
   }, [gameOver, gameClear, refreshKey]);
 
   return (
-    <div className="flex flex-col items-center mt-4 relative">
+    <div
+      style={{
+        width: "800px",
+        height: "650px",
+        backgroundColor: back ? back : 'black',
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
       <h1 className="text-xl font-bold">Score: {score}</h1>
-      <div className="relative mt-2" style={{ width: width, height: height }}>
-        <canvas ref={canvasRef} width={width} height={height} className="border block" />
+      <canvas
+        ref={canvasRef}
+        width={width}
+        height={height}
+        className="border block"
+      />
+      <div className="flex flex-row items-center gap-4 mt-4">
+        <button className="p-2 border border-white">
+          <NavLink
+            to={{ pathname: "/result", search: `?id=${id}&name=${name}
+            &die=${die}&rate=${rate}&player=${player}&enemy=${enemy}
+            &beam=${beam}&back=${back}&win=${win}&lose=${lose}` }}
+            className="text-blue-500 hover:underline"
+          >
+            結果
+          </NavLink>
+        </button>
+        {/* <h1 className="text-xl">プログラミング</h1> */}
+
+        <button
+          type="button"
+          onClick={() => {
+            setPlayerX(400);
+            setScore(0);
+            setBullets([]);
+            setEnemies([]);
+            setRefreshKey((prev) => prev + 1);
+          }}
+          className="p-2 border"
+        >
+          リトライ
+        </button>
       </div>
-      <button
-        type="button"
-        onClick={() => {
-          setPlayerX(400);
-          setScore(0);
-          setBullets([]);
-          setEnemies([]);
-          setRefreshKey((prev) => prev + 1);
-        }}
-        className="mt-4 p-2 border"
-      >
-        リトライ
-      </button>
     </div>
   );
 };
 
 export default Game;
-
-//以下は後で利用するかも知れない別コンポーネント
-export const Program = () => {
-  const location = useLocation();
-  const query = new URLSearchParams(location.search);
-  const id = query.get("id"); // "123"
-  const name = query.get("name"); // "まっつん"
-  return (
-    <div className="program">
-      <NavLink to={{ pathname: "/result", search: `?id=${id}&name=${name}` }}>
-        結果
-      </NavLink>
-      <h1>プログラミング</h1>
-    </div>
-  );
-};
