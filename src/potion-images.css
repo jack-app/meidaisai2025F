@@ -1,0 +1,24 @@
+.potion-images {
+   background-image: url('./green-potion.jpg'); 
+   background-size: contain;
+   background-repeat: no-repeat;
+   background-position: top right;
+   position: fixed;
+   top: 10vh;      
+   right: 15vw;    
+   width: 40vw;
+   height: 40vh;
+   z-index: 200;
+}
+.potion-images2{
+  
+   background-size: contain;
+   background-repeat: no-repeat;
+   background-position: top right;
+   position: fixed;
+   top: 10vh;      
+   right: 15vw;    
+   width: 40vw;
+   height: 40vh;
+   z-index: 200;
+}
