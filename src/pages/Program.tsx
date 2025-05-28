@@ -40,4 +40,4 @@ export const Program = () => {
       <div className="background-image-magic">  </div>
     </div>
   );
-};
+}
