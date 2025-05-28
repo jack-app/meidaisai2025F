@@ -1,0 +1,17 @@
+.potion-create2-button {
+  position: absolute;
+  top: 35%;
+  right: 20%;
+  right: 20%;
+  width: 10;
+  height: 10%;
+  padding: 10px 24px;
+  font-size: 1.1em;
+  border-radius: 8px;
+  border: 1px solid #aaa;
+  background: #fffbe7;
+  color: #5B3A1B;
+  cursor: pointer;
+  box-shadow: 0 2px 8px #ccc;
+  z-index: 100;
+}

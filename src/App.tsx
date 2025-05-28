@@ -8,6 +8,8 @@ import { ProgramTyupei } from "./pages/ProgramTyupei";
 import { Result } from "./pages/Result";
 import { Select } from "./pages/Select";
 import { PotionCreate } from "./pages/Potion-create";
+import { PotionCreate2 } from "./pages/Potion-create-2";
+import { PotionCreateResult } from "./pages/Potion-create-result";
 
 export default function App() {
   return (
@@ -25,6 +27,8 @@ export default function App() {
           <Route  path="/programTyupei"element={<ProgramTyupei />}/>
           <Route  path="/result"element={<Result />}/>
           <Route  path="/potion-create"element={<PotionCreate />}/>
+          <Route  path="/potion-create-2"element={<PotionCreate2 />}/>
+          <Route  path="/potion-create-result"element={<PotionCreateResult />}/>
         </Routes>
       </BrowserRouter>
     </div>
