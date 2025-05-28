@@ -9,9 +9,9 @@ export const Program = () => {
   const name = query.get("name"); // "まっつん"
   return (
     <div className="program">
-      <NavLink to={{ pathname: "/result", search: `?id=${id}&name=${name}` }}>結果</NavLink>
+      <NavLink to={{ pathname: "/result", search: `?id=${id}&name=${name}` }}>結果(こちら側を押すと失敗画面へ移動します)</NavLink><br></br>
       <Link to="/result" state={{ state: ["Success"] }}>
-        結果ページへ(ここのコメントアウト外して「結果ページへ」の方のリンクを押すとResultページにstate: ["Success"]が表示されます)
+        結果ページへ(こちら側を押すと成功画面へ移動します)
       </Link>
       <h1>プログラミング</h1>
     </div>
