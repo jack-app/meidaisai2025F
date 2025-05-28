@@ -1,0 +1,30 @@
+body {
+      background-color: rgb(237, 251, 216);
+      
+      justify-content: center;
+  align-items: center;
+  max-width: 10000px;
+    }
+
+
+.select {
+display: flex;
+  color: rgb(19, 210, 235);
+  background-color: rgb(237, 251, 216);
+  gap: 60px;
+}
+
+.box_1, .box_2, .box_3 {
+  height: 900px;
+  width: 600px;
+  font-size: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 30px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+}
+
+.box_1 { background-color: rgb(205, 239, 250); }
+.box_2 { background-color: rgb(250, 205, 249); }
+.box_3 { background-color: rgb(143, 253, 131); }
