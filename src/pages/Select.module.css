@@ -1,0 +1,42 @@
+.select {
+background-color: rgb(237, 251, 216);
+color: rgb(19, 210, 235);
+height: 600px;
+width: 1400px;
+display: flex;
+justify-content: center;
+align-items: center; 
+}
+
+.box_1 {
+background-color: rgb(205, 239, 250);
+display: flex; /* Flexbox(子要素の並びや位置をコントロールできる)を有効にする */
+justify-content: center; /* 横方向の中央寄せ */
+align-items: center;     /* 縦方向の中央寄せ */
+border-radius: 30px; /* 角を丸くする */
+box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+height: 500px;
+width: 400px;
+}
+
+.box_2 {
+background-color: rgb(250, 205, 249);
+display: flex; /* Flexbox(子要素の並びや位置をコントロールできる)を有効にする */
+justify-content: center; /* 横方向の中央寄せ */
+align-items: center;     /* 縦方向の中央寄せ */
+border-radius: 30px; /* 角を丸くする */
+box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+height: 500px;
+width: 400px;
+}
+
+.box_3 {
+background-color: rgb(143, 253, 131);
+display: flex; /* Flexbox(子要素の並びや位置をコントロールできる)を有効にする */
+justify-content: center; /* 横方向の中央寄せ */
+align-items: center;     /* 縦方向の中央寄せ */
+border-radius: 30px; /* 角を丸くする */
+box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+height: 500px;
+width: 400px;
+}
