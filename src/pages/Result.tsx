@@ -42,6 +42,7 @@ export const Result = () => {
           <h1>No state</h1>
           <img src={fatal} className="Fatal" alt="fatal" />
           <NavLink to={{ pathname: "/program", search: `?id=${id}&name=${name}` }}>プログラミングへ</NavLink>
+          <NavLink to={{ pathname: "/programAlto", search: `?id=${id}&name=${name}` }}>プログラミングおるとへ</NavLink>
         </div>
       )}
     </div>
