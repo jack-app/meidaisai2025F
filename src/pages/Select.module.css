@@ -10,13 +10,13 @@ body {
 display: flex;
   color: rgb(19, 210, 235);
   background-color: rgb(237, 251, 216);
-  gap: 60px;
+  gap: 3vw;
 }
 
 .box_1, .box_2, .box_3 {
-  height: 900px;
-  width: 600px;
-  font-size: 40px;
+  height:85vh;
+  width: 30vw;
+  font-size: 2em;
   display: flex;
   justify-content: center;
   align-items: center;

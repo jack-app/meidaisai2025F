@@ -1,4 +1,4 @@
-import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import '../magic-game.css';
 import '../Button-magicgame.css';
@@ -33,7 +33,11 @@ export const Program = () => {
 
   return (
     <div className="program">
-      <NavLink to={{ pathname: "/result", search: `?id=${id}&name=${name}` }}>結果</NavLink>
+      <NavLink to={{ pathname: "/result", search: `?id=${id}&name=${name}` }}>結果(こちら側を押すと失敗画面へ移動します)</NavLink><br></br>
+      <Link to="/result" state={{ state: ["Success"] }}>
+        結果ページへ(こちら側を押すと成功画面へ移動します)
+      </Link>
+      <h1>プログラミング</h1>
       <h1>魔法のポーション</h1>
       <p>{descriptions[currentIndex]}</p> {/* 現在の説明文を表示 */}
       <button className="btn-magicgame" onClick={handleNextDescription}>次へ</button> {/* ボタンを追加 */}
