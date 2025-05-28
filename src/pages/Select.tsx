@@ -16,7 +16,7 @@ export const Select = () => {
         <div>
         <h2>ゲーム画像１</h2>
         ここに説明を入力<br></br>
-        <NavLink to={{ pathname: "/program", search: `?id=${id}&name=${name}` }}>プレイ</NavLink>
+       <h2><NavLink to={{ pathname: "/program", search: `?id=${id}&name=${name}` }}>プレイ</NavLink></h2>
         </div>
       </div>
 
@@ -24,7 +24,7 @@ export const Select = () => {
         <div>
        <h2>ゲーム画像２</h2>
        ここに説明を入力<br></br>
-       <NavLink to={{ pathname: "/program", search: `?id=${id}&name=${name}` }}>プレイ</NavLink>
+       <h2><NavLink to={{ pathname: "/program", search: `?id=${id}&name=${name}` }}>プレイ</NavLink></h2>
        </div>
       </div>
       
@@ -32,7 +32,7 @@ export const Select = () => {
         <div>
         <h2>ゲーム画像３</h2>
         ここに説明を入力<br></br>
-        <NavLink to={{ pathname: "/program", search: `?id=${id}&name=${name}` }}>プレイ</NavLink>
+        <h2><NavLink to={{ pathname: "/program", search: `?id=${id}&name=${name}` }}>プレイ</NavLink></h2>
         </div>
       </div>
 
