@@ -14,27 +14,29 @@ export const Select = () => {
     <div className={styles.select}>
       <div className={styles.box_1}>
         <div>
-        <h1>選択肢１</h1>
-        <NavLink to={{ pathname: "/program", search: `?id=${id}&name=${name}` }}>リンク１</NavLink>
+        <h2>ゲーム画像１</h2>
+        ここに説明を入力<br></br>
+        <NavLink to={{ pathname: "/program", search: `?id=${id}&name=${name}` }}>プレイ</NavLink>
         </div>
       </div>
 
       <div className={styles.box_2}>
         <div>
-       <h1>選択肢２</h1>
-       リンク２
+       <h2>ゲーム画像２</h2>
+       ここに説明を入力<br></br>
+       <NavLink to={{ pathname: "/program", search: `?id=${id}&name=${name}` }}>プレイ</NavLink>
        </div>
       </div>
       
       <div className={styles.box_3}>
         <div>
-        <h1>選択肢３</h1>
-        リンク３
+        <h2>ゲーム画像３</h2>
+        ここに説明を入力<br></br>
+        <NavLink to={{ pathname: "/program", search: `?id=${id}&name=${name}` }}>プレイ</NavLink>
         </div>
       </div>
 
     </div>
   );
 };
-
 
