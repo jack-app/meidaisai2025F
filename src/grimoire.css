@@ -1,0 +1,7 @@
+.potion-create {
+    background-image: url('./879077.jpg'); 
+    background-size: cover; /* 画像を画面全体に拡大縮小 */
+    background-position: center; /* 画像を中央に配置 */
+    width: 100vw; 
+    height: 100vh; 
+}

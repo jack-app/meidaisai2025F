@@ -7,9 +7,11 @@ import { ProgramAlto } from "./pages/ProgramAlto";
 import { ProgramTyupei } from "./pages/ProgramTyupei";
 import { Result } from "./pages/Result";
 import { Select } from "./pages/Select";
+import { PotionCreate } from "./pages/Potion-create";
 
 export default function App() {
   return (
+    <div className="background-image-magic">
     <div className="app">
       <BrowserRouter>
         <ul>
@@ -22,8 +24,10 @@ export default function App() {
           <Route  path="/programAlto"element={<ProgramAlto />}/>
           <Route  path="/programTyupei"element={<ProgramTyupei />}/>
           <Route  path="/result"element={<Result />}/>
+          <Route  path="/potion-create"element={<PotionCreate />}/>
         </Routes>
       </BrowserRouter>
+    </div>
     </div>
   );
 }
