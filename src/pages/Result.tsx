@@ -2,6 +2,9 @@ import { NavLink, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import fatal from './ResultImage/Fatalerror.png';
 import success from './ResultImage/Success.png';
+import cracker from './ResultImage/cracker.png';
+import crackermigi from './ResultImage/crackermigi.png';
+import { motion } from 'framer-motion';
 
 export const Result = () => {
   // URLパラメータとstateを取得
@@ -25,19 +28,72 @@ export const Result = () => {
   return (
     <div className="result">
       {state ? (
-        <div>
-          <h1>リザルト</h1>
+        <motion.div initial={{ opacity: 0, scale: 0, x: 0 }} animate={{ opacity: 1, scale: 1 ,x:0}} transition={{ duration: 1 }} style={{ position: "relative", display: "inline-block" }}>
+          {/* <h1>リザルト</h1> */}
           <ul>
-            {state.state.map((item: string, index: number) => (
+           {/*  {state.state.map((item: string, index: number) => (
               <li key={index}>{item}</li>
-            ))}
-            <img src={success} className="Success" alt="success" />
+            ))} */}
+            <img src={cracker} className="Cracker" alt="cracker" style={{position: 'absolute',
+            bottom: '-200px',
+            left: '-200px',
+            padding: '15px 20px',
+            borderRadius: '4px',width: 300, height: 250}}/>
+            <img src={crackermigi} className="Crackermigi" alt="crackermigi" style={{position: 'absolute',
+            bottom: '-200px',
+            right: '-200px',
+            padding: '15px 20px',
+            borderRadius: '4px',width: 250, height: 250}}/>
+            <img src={success} className="Success" alt="success" style={{width: 800, height: 350}}/>
           </ul>
           <NavLink to={{ pathname: "/select", search: `?id=${id}&name=${name}` }}>
-            選択へ
+          <button
+          style={{
+            position: 'absolute',
+            bottom: '51px',
+            right: '35px',
+            padding: '15px 20px',
+            borderRadius: '4px',
+            /* border: '1px solid #808080',
+            backgroundColor: '#ffffff', */
+            border: '1px solid #1e90ff',
+            backgroundColor: '#1e90ff',
+            color: 'white',
+            fontSize: '16px',
+            cursor: 'pointer',
+            width: '150px',
+            height: '40px',
+          }}
+          >
+          OK
+        </button>
           </NavLink>
-        </div>
+        </motion.div>
       ) : (
+        <div style={{ position: "relative", display: "inline-block" }}>
+          {/* <h1>No state</h1> */}
+          <img src={fatal} className="Fatal" alt="fatal" style={{width: 900, height: 350}}/>
+          <NavLink to={{ pathname: "/program", search: `?id=${id}&name=${name}` }}>
+          <button
+          style={{
+            position: 'absolute',
+            bottom: '40px',
+            right: '50px',
+            padding: '17px 20px',
+            borderRadius: '4px',
+            /*border: '1px solid #808080',
+            backgroundColor: '#ffffff',*/
+            border: '1px solid #1e90ff',
+            backgroundColor: '#1e90ff',
+            color: 'white',
+            fontSize: '16px',
+            cursor: 'pointer',
+            width: '150px',
+            height: '40px',
+          }}
+        >
+          OK
+        </button></NavLink>
         <div>
           <h1>No state</h1>
           <img src={fatal} className="Fatal" alt="fatal" />
