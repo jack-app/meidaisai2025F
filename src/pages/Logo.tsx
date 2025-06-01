@@ -1,5 +1,8 @@
-import React, { useEffect, useState } from "react";
+
 import styles from "./Logo.module.css";
+import React, { useState, useEffect, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom'; // 画面遷移用
+import './Firststory.css'; // 専用のCSSファイルをインポート
 
 const MESSAGE = "MEいTAい祭";
 
