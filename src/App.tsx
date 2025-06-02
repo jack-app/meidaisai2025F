@@ -5,6 +5,7 @@ import { Pnf } from "./pages/Pnf";
 import { Program } from "./pages/Program";
 import { ProgramAlto } from "./pages/ProgramAlto";
 import { ProgramTyupei } from "./pages/ProgramTyupei";
+import { Game } from "./pages/ProgramTettin"
 import { Result } from "./pages/Result";
 import { Select } from "./pages/Select";
 import { PotionCreate } from "./pages/Potion-create";
@@ -25,6 +26,7 @@ export default function App() {
           <Route  path="/program"element={<Program />}/>
           <Route  path="/programAlto"element={<ProgramAlto />}/>
           <Route  path="/programTyupei"element={<ProgramTyupei />}/>
+          <Route  path="/programTettin"element={<Game />}/>
           <Route  path="/result"element={<Result />}/>
           <Route  path="/potion-create"element={<PotionCreate />}/>
           <Route  path="/potion-create-2"element={<PotionCreate2 />}/>
