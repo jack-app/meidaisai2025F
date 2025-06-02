@@ -11,6 +11,7 @@ import { PotionCreate } from "./pages/Potion-create";
 import { PotionCreate2 } from "./pages/Potion-create-2";
 import { PotionCreateResult } from "./pages/Potion-create-result";
 import { Firststory } from "./pages/Firststory"; // パスは適宜調整
+import TitleScreen from "./pages/TitleScreen"; // パスは適宜調整
 
 export default function App() {
   return (
@@ -21,7 +22,8 @@ export default function App() {
         </ul>
         <Routes>
           <Route  path="*"element={<Pnf />}/>
-          <Route path="/" element={<Firststory />} /> {/* 初期画面をFirststoryに */}
+          <Route path="/" element={<TitleScreen />} />
+          <Route path="/Firststory" element={<Firststory />} /> {/* 初期画面をFirststoryに */}
           {/*<Route  path="/"element={<Select />}/>*/}
           <Route  path="/select"element={<Select />}/>
           <Route  path="/program"element={<Program />}/>
