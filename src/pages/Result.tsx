@@ -12,6 +12,38 @@ export const Result = () => {
   const { state } = location;
   const id = query.get("id");
   const name = query.get("name");
+  // 第一段階で渡してほしいもの
+  //敵の数字が0になったら消える：数字が-10で消えるようにしておく
+  //与えられてないとき、die:500（クリアできない）
+  //最初は1から10の敵しか出現しない
+  const die = query.get("die") || "500";
+  
+  // 第二段階で渡してほしいもの
+  //弾の頻度：数字（何ミリ秒に一回か）
+  //与えられてないとき,rate:500（最初の方しかクリアできない）
+  const rate = query.get("rate") || "500";
+  
+  // 完成段階で私てほしいもの
+  //敵enemy、味方player、ビームbeam、背景の色back：'red'などテキスト
+  //与えられてない場合enemy'green',player'blue',beam'red',back'black'
+  //勝利お祝いコメントwin、敗北煽りコメントlose：'Game Over'などテキスト
+  //与えられてない場合win'Game Clear',lose'Game Over'
+
+  const playter = query.get("player") || "blue";
+  const enemy = query.get("enemy") || "green";
+  const beam = query.get("beam") || "red";
+  const back = query.get("back") || "black";
+  const win = query.get("win") || "Game Clear";
+  const lose = query.get("lose") || "Game Over";
+  const source = query.get("source") || "program";
+
+  let returnPath = "/select";
+  if (source === "tettin") {
+    returnPath = "/programTettin";
+  } else if (source === "tyupei") {
+    returnPath = "/program";
+  }
+
   const { width, height } = useWindowSize();
 
   const popOutAnimation = {
@@ -295,7 +327,7 @@ export const Result = () => {
               </div>
             </div>
             <div style={footerStyle}>
-              <NavLink to={{ pathname: "/program", search: `?id=${id}&name=${name}` }}>
+              <NavLink to={{ pathname: returnPath, search: location.search }}>
                 <button style={systemButtonStyle}>OK</button>
               </NavLink>
             </div>

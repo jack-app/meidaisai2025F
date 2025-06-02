@@ -336,6 +336,16 @@ export const Game = () => {
 
   return (
     <div
+    style={{
+      width: "100vw",
+      height: "100vh",
+      backgroundColor: back ? back : 'black', // ← ここで全体の背景色を設定
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+    }}
+  >
+    <div
       style={{
         width: "800px",
         height: "650px",
@@ -358,7 +368,7 @@ export const Game = () => {
           <NavLink
             to={{ pathname: "/result", search: `?id=${id}&name=${name}
             &die=${die}&rate=${rate}&player=${player}&enemy=${enemy}
-            &beam=${beam}&back=${back}&win=${win}&lose=${lose}` }}
+            &beam=${beam}&back=${back}&win=${win}&lose=${lose}&source=tettin` }}
             className="text-blue-500 hover:underline"
           >
             結果
@@ -381,6 +391,8 @@ export const Game = () => {
         </button>
       </div>
     </div>
+  </div>
+    
   );
 };
 
