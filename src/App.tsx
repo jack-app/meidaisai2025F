@@ -11,6 +11,8 @@ import { Select } from "./pages/Select";
 import { PotionCreate } from "./pages/Potion-create";
 import { PotionCreate2 } from "./pages/Potion-create-2";
 import { PotionCreateResult } from "./pages/Potion-create-result";
+import { PotionCreateResult2 } from "./pages/potion-create-result2";
+import { Ending } from "./pages/Ending";
 import { Firststory } from "./pages/Firststory"; // パスは適宜調整
 
 export default function App() {
@@ -33,6 +35,8 @@ export default function App() {
           <Route  path="/potion-create"element={<PotionCreate />}/>
           <Route  path="/potion-create-2"element={<PotionCreate2 />}/>
           <Route  path="/potion-create-result"element={<PotionCreateResult />}/>
+          <Route  path="/potion-create-result2"element={<PotionCreateResult2 />}/>
+          <Route  path="/ending"element={<Ending />}/>
         </Routes>
       </BrowserRouter>
     </div>

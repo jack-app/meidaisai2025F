@@ -1,6 +1,5 @@
 import '../grimoire.css';
 import { useState } from "react";
-import '../potion-images.css';
 import '../potion-puzzlebox.css';
 import { useNavigate } from "react-router-dom";
 //ボックス内の画像
@@ -20,7 +19,7 @@ export const PotionCreate2 = () => {
     { id: 4, name: "水" },
     { id: 5, name: "魔法石" },
   ];
-
+ const [showHint, setShowHint] = useState(true);
   // 各ボックスに格納されたアイテムID
   const [boxes, setBoxes] = useState<(number | null)[]>([1, 2, 3, 4, 5]); // 5枠に拡張
   // 追加のボックス
@@ -38,12 +37,7 @@ export const PotionCreate2 = () => {
   // 画像選択ボタンの表示状態
   const [showColorButtons, setShowColorButtons] = useState(false);
 
-  // 色ごとの画像パス
-  const potionImages = {
-    orange: 'url(./なりきりドリンク.png)',
-    green: 'url(./green-potion.jpg)',
-    blue: 'url(./26261624.jpg)',
-  };
+  
 
   const navigate = useNavigate();
 
@@ -101,19 +95,41 @@ export const PotionCreate2 = () => {
 
   // 調合ボタンのクリック処理
   const handleMix = () => {
-    // extraBoxesに水(4), 薬草(1), 謎の黄色い液体(3)が全て含まれているか
-    const required = [1, 3, 4];
+    // オレンジ色画像が選択されているか
+    const isOrange =
+      selectedPotionImg === '/なりきりドリンク.png' ||
+      selectedPotionImg.endsWith('なりきりドリンク.png');
+    // extraBoxesに水(4), 魔法石(5), 動物(2)が全て含まれているか
+    const required = [4, 5, 2];
     const hasAll = required.every(id => extraBoxes.includes(id));
-    if (hasAll) {
-      navigate("/potion-create-result?result=success");
+    if (isOrange && hasAll) {
+      navigate("/potion-create-result2?result=success");
     } else {
-      navigate("/potion-create-result?result=failure");
+      navigate("/potion-create-result2?result=failure");
     }
   };
 
   return (
     <div className="potion-create2" style={{ display: "flex", gap: "32px" }}>
-      {/* 左側に説明テキストを追加 */}
+       {/* 追加: 最前面ヒントボタン */}
+      {showHint && (
+        <button
+          style={{
+            border: "2px solid black",
+            fontSize: "1.5em",
+            position: "fixed",
+            top: "50%",
+            left: "50%",
+            transform: "translateX(-50%)",
+            zIndex: 9999,
+          }}
+          onClick={() => setShowHint(false)}
+        >
+          文章を読み解き、適切な"材料"と"画像"を選ぼう！<br/>
+                 (説明を閉じる)
+        </button>
+      )}
+      {/* 左側に説明テキストを追加 
       <div>
         <div style={{
           fontFamily: 'Caveat, Yu Mincho, 游明朝, serif, cursive',
@@ -162,7 +178,7 @@ export const PotionCreate2 = () => {
       <div id="txt-on-grimoire">
       </div>
       <br/>
-    <div className="potion-create-text">
+    {/*<div className="potion-create-text">
       <textarea
         value={memo}
         onChange={(e) => {
@@ -184,7 +200,7 @@ export const PotionCreate2 = () => {
       </div>
     {/*<div className="potion-images2"></div> */}
 
-    
+
     {/* 通常のパズルボックス */}
     <div className="puzzle-box-container">
       {boxes.map((itemId, idx) => (
@@ -231,19 +247,51 @@ export const PotionCreate2 = () => {
     </div>
     {/* 画像選択ボタンを画面右上に配置 */}
     <div>
-    <button
-      className="potion-create2-button"
-      onClick={() => setShowColorButtons(!showColorButtons)}
-    >
-      画像を選択
-    </button>
-    {showColorButtons && (
-      <div style={{ position: 'absolute', top: '64px', right: '32px', display: 'flex', flexDirection: 'column', gap: '10px', zIndex: 101 }}>
-        <button  style={{ background: '#ffb347' }} onClick={() => { setSelectedPotionImg(potionImages.orange); setShowColorButtons(false); }}>オレンジ色</button>
-        <button  style={{ background: '#7be07b' }} onClick={() => { setSelectedPotionImg(potionImages.green); setShowColorButtons(false); }}>緑色</button>
-        <button  style={{ background: '#6ec6ff' }} onClick={() => { setSelectedPotionImg(potionImages.blue); setShowColorButtons(false); }}>青色</button>
-      </div>
-    )}
+      {!showColorButtons && !selectedPotionImg ? (
+        <button
+          className="potion-create2-button"
+          onClick={() => setShowColorButtons(true)}
+        >
+          画像を選択
+        </button>
+      ) : null}
+      {showColorButtons && !selectedPotionImg && (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', top: '17%', right: '21%', position: 'absolute' }}>
+          <button
+            style={{ background: '#ffb347' }}
+            onClick={() => {
+              setSelectedPotionImg('/なりきりドリンク.png');
+              setShowColorButtons(false);
+            }}
+          >
+            オレンジ色
+          </button>
+          <button
+            style={{ background: '#7be07b' }}
+            onClick={() => {
+              setSelectedPotionImg('/green-potion.jpg');
+              setShowColorButtons(false);
+            }}
+          >
+            緑色
+          </button>
+          <button
+            style={{ background: '#6ec6ff' }}
+            onClick={() => {
+              setSelectedPotionImg('/blue-potion-image.png');
+              setShowColorButtons(false);
+            }}
+          >
+            青色
+          </button>
+        </div>
+      )}
+      {selectedPotionImg && (
+        <img
+          src={selectedPotionImg}
+          style={{ width: '18%', height: '40%', top:'10%', right: '15%', position: 'absolute',  backgroundSize: 'contain', backgroundRepeat: 'no-repeat' }}
+        />
+      )}
     </div>
     {/* ポーション画像表示部分はselectedPotionImgをそのまま使う */}
     </div>

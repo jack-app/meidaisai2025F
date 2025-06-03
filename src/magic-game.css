@@ -17,3 +17,16 @@ display: flex;
 .program h1 {
     color: rgb(175, 6, 6);
 }
+
+.ending {
+  background-image: url('./assets/magic-game.png'); /* 画像のパスを指定 */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
