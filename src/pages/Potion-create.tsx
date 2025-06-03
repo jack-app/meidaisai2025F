@@ -19,6 +19,8 @@ export const PotionCreate = () => {
     { id: 5, name: "魔法石" }
   ];
 
+   const [showHint, setShowHint] = useState(true);
+
   // 各ボックスに格納されたアイテムID
   const [boxes, setBoxes] = useState<(number | null)[]>([1, 2, 3, 4, 5]); // 5枠に拡張
   // 追加のボックス
@@ -98,6 +100,24 @@ export const PotionCreate = () => {
 
   return (
     <div className="potion-create" style={{ display: "flex", gap: "32px" }}>
+       {/* 追加: 最前面ヒントボタン */}
+      {showHint && (
+        <button
+          style={{
+            border: "2px solid black",
+            fontSize: "1.5em",
+            position: "fixed",
+            top: "50%",
+            left: "50%",
+            transform: "translateX(-50%)",
+            zIndex: 9999,
+          }}
+          onClick={() => setShowHint(false)}
+        >
+          文章を読み解き、適切な材料を選ぼう！<br/>
+                 (説明を閉じる)
+        </button>
+      )}
       {/* 左側に説明テキストを追加 */}
       
         <div>

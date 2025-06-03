@@ -11,3 +11,16 @@
     transform: translateX(-50%); /* 横中央寄せ */
     z-index: 100;            /* 他要素より前面に */
 }
+.ending-button {
+    display: inline-block;
+    color: #fff;
+    background-color: #8B4513;
+    border: 2px solid black;
+    width: 40vh;
+    height: 15vh;
+    position: absolute;       /* 画面に固定 */
+    left: 50%;               /* 横中央 */
+    bottom: 5vh;             /* 下から少し余白 */
+    transform: translateX(-50%); /* 横中央寄せ */
+    z-index: 100;            /* 他要素より前面に */
+}

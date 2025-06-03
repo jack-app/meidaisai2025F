@@ -11,7 +11,7 @@
    z-index: 200;
 }
 .potion-images2{
-  
+   background-image: url('./なりきりドリンク.png'); 
    background-size: contain;
    background-repeat: no-repeat;
    background-position: top right;
