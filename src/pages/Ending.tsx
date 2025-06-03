@@ -1,7 +1,7 @@
 import React from "react";
-import '../magic-game.css';
+import './css/magic-game.css';
 import { useNavigate } from "react-router-dom";
-import '../Button-magicgame.css';
+import './css/Button-magicgame.css';
 
 export const Ending = () => {
   const navigate = useNavigate();

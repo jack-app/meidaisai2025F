@@ -1,7 +1,7 @@
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import '../magic-game.css';
-import '../Button-magicgame.css';
+import './css/magic-game.css';
+import './css/Button-magicgame.css';
 
 export const Program = () => {
   const location = useLocation();

@@ -1,8 +1,8 @@
-import '../grimoire.css';
-import SuccessImg from '../ChatGPT Image 2025年5月26日 11_01_19.png';
-import FatalerrorImg from '../ChatGPT Image 2025年5月25日 23_45_42.png';
+import './css/grimoire.css';
+import SuccessImg from '../assets/ChatGPT Image 2025年5月26日 11_01_19.png';
+import FatalerrorImg from '../assets/ChatGPT Image 2025年5月25日 23_45_42.png';
 import { useLocation, useNavigate } from 'react-router-dom';
-import bgImg from '../879077.jpg';
+import bgImg from '../assets/879077.jpg';
 
 export const PotionCreateResult2 = () => {
   const location = useLocation();
@@ -20,7 +20,7 @@ export const PotionCreateResult2 = () => {
       backgroundRepeat: 'no-repeat',
       backgroundPosition: 'center',
     }}>
-      <div style={{ textAlign: 'center', marginTop: '60px' }}>
+      <div style={{ textAlign: 'center', marginTop: '0px' }}>
         {result === 'success' ? (
           <>
             <h1 style={{ color: '#4B8B3B', fontSize: '2.5em', marginBottom: '24px' }}>調合成功！</h1>

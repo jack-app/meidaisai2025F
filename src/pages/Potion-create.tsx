@@ -1,14 +1,14 @@
-import '../grimoire.css';
+import './css/grimoire.css';
 import { useState } from "react";
-import '../potion-images.css';
-import '../potion-puzzlebox.css';
+import './css/potion-images.css';
+import './css/potion-puzzlebox.css';
 import { useNavigate } from "react-router-dom";
 //ボックス内の画像
-import herbImg from '../24841317.jpg';
-import animalImg from '../kegawa.jpg';
-import yellowwaterImg from '../黄色い液体 2025-05-25 225506.png';
-import waterImg from '../26261624.jpg';
-import magicStoneImg from '../magicstoneImg.png';
+import herbImg from '../assets/24841317.jpg';
+import animalImg from '../assets/kegawa.jpg';
+import yellowwaterImg from '../assets/黄色い液体 2025-05-25 225506.png';
+import waterImg from '../assets/26261624.jpg';
+import magicStoneImg from '../assets/magicstoneImg.png';
 export const PotionCreate = () => {
   // 仮のアイテムリスト
   const items = [

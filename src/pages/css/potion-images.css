@@ -1,5 +1,5 @@
 .potion-images {
-   background-image: url('./green-potion.jpg'); 
+   background-image: url('../../assets/green-potion.jpg'); 
    background-size: contain;
    background-repeat: no-repeat;
    background-position: top right;
@@ -11,7 +11,7 @@
    z-index: 200;
 }
 .potion-images2{
-   background-image: url('./なりきりドリンク.png'); 
+   background-image: url('../../assets/なりきりドリンク.png'); 
    background-size: contain;
    background-repeat: no-repeat;
    background-position: top right;
