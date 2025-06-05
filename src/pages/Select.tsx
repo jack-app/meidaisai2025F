@@ -41,6 +41,7 @@ export const Select = () => {
         <div>
         <h2>ポーション作りゲーム</h2>
         ここに説明を入力<br></br>
+        {/* ゲームの製作者の名前のせるのはいかが？「メタ要素」として */}
        <h2><NavLink to={{ pathname: "/program", search: `?id=${id}&name=${name}` }}>プレイ</NavLink></h2>
         </div>
       </div>
@@ -55,6 +56,8 @@ export const Select = () => {
       
       <div className={styles.box_3}>
         <div>
+        <h2>ゲーム画像３</h2>
+        <NavLink to="/title">戻る</NavLink> 
         <h2>ののじ探しゲーム</h2>
         ここに説明を入力<br></br>
         <h2><NavLink to={{ pathname: "/programAlto", search: `?id=${id}&name=${name}` }}>プレイ</NavLink></h2>
@@ -62,6 +65,8 @@ export const Select = () => {
       </div>
 
     </div>
+
+    
   );
 };
 
