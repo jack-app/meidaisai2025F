@@ -5,16 +5,16 @@ import laserGunImg from "../images/レーザー銃.png";
 export const Game = () => {
   const location = useLocation();
   const query = new URLSearchParams(location.search);
-  const id = query.get("id");
+  let id = query.get("id");
   const name = query.get("name");
   const die = query.get("die");
   const rate = query.get("rate");
-  const player = query.get("player");
-  const enemy = query.get("enemy");
-  const beam = query.get("beam");
-  const back = query.get("back");
-  const win = query.get("win");
-  const lose = query.get("lose");
+  const player = query.get("player") || "blue"; // デフォルトのプレイヤー色
+  const enemy = query.get("enemy") || "green";
+  const beam = query.get("beam") || "red";
+  const back = query.get("back") || "black";
+  const win = query.get("win") || "Game Clear";
+  const lose = query.get("lose") || "Game Over";
 
   const [playerX, setPlayerX] = useState(200);
   const [bullets, setBullets] = useState<Array<{ x: number; y: number }>>([]);
@@ -197,7 +197,7 @@ export const Game = () => {
         context.font = "bold 36px sans-serif";
         context.textAlign = "center";
         context.textBaseline = "middle";
-        context.fillText("Game Over", width / 2, height / 2);
+        context.fillText(lose, width / 2, height / 2);
         return;
       }
       if (gameClear) {
@@ -205,7 +205,7 @@ export const Game = () => {
         context.font = "bold 36px sans-serif";
         context.textAlign = "center";
         context.textBaseline = "middle";
-        context.fillText("Game Clear", width / 2, height / 2);
+        context.fillText(win, width / 2, height / 2);
         return;
       }
 
@@ -370,6 +370,7 @@ export const Game = () => {
             &die=${die}&rate=${rate}&player=${player}&enemy=${enemy}
             &beam=${beam}&back=${back}&win=${win}&lose=${lose}&source=tettin` }}
             className="text-blue-500 hover:underline"
+            state={id == "me4"}
           >
             結果
           </NavLink>

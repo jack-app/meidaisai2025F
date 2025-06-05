@@ -15,7 +15,7 @@ export const Select = () => {
   //敵の数字が0になったら消える：数字が-10で消えるようにしておく
   //与えられてないとき、die:500（クリアできない）
   //最初は1から10の敵しか出現しない
-  const die = query.get("die") || "500";
+  const die = query.get("die") || "-10";
   
   // 第二段階で渡してほしいもの
   //弾の頻度：数字（何ミリ秒に一回か）
@@ -42,7 +42,7 @@ export const Select = () => {
         <h2>ポーション作りゲーム</h2>
         ここに説明を入力<br></br>
         {/* ゲームの製作者の名前のせるのはいかが？「メタ要素」として */}
-       <h2><NavLink to={{ pathname: "/program", search: `?id=${id}&name=${name}` }}>プレイ</NavLink></h2>
+       <h2><NavLink to={{ pathname: "/select-tyupei", search: `?id=${id}&name=${name}` }}>プレイ</NavLink></h2>
         </div>
       </div>
 
@@ -60,7 +60,7 @@ export const Select = () => {
         <NavLink to="/title">戻る</NavLink> 
         <h2>ののじ探しゲーム</h2>
         ここに説明を入力<br></br>
-        <h2><NavLink to={{ pathname: "/programAlto", search: `?id=${id}&name=${name}` }}>プレイ</NavLink></h2>
+        <h2><NavLink to={{ pathname: "/select-alto", search: `?id=${id}&name=${name}` }}>プレイ</NavLink></h2>
         </div>
       </div>
 

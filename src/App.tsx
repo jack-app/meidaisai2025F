@@ -13,7 +13,13 @@ import { PotionCreate2 } from "./pages/Potion-create-2";
 import { PotionCreateResult } from "./pages/Potion-create-result";
 import { PotionCreateResult2 } from "./pages/potion-create-result2";
 import { Ending } from "./pages/Ending";
-import { Firststory } from "./pages/Firststory"; // パスは適宜調整
+import { Firststory } from "./pages/Firststory"; 
+import {SelectTettin1} from "./pages/select-tettin"; 
+import { SelectTettin2 } from "./pages/select-tettin2";
+import { SelectTettin3 } from "./pages/select-tettin3";
+import { SelectTyupei } from "./pages/select-tyupei";
+import { SelectAlto } from "./pages/select-alto";
+import Titlelogo from "./pages/Titlelogo";
 
 export default function App() {
   return (
@@ -23,8 +29,9 @@ export default function App() {
         </ul>
         <Routes>
           <Route  path="*"element={<Pnf />}/>
-          <Route path="/" element={<Firststory />} /> {/* 初期画面をFirststoryに */}
+          <Route path="/FirstStory" element={<Firststory />} />
           {/*<Route  path="/"element={<Select />}/>*/}
+           <Route  path="/"element={<Titlelogo />}/>
           <Route  path="/select"element={<Select />}/>
           <Route  path="/program"element={<Program />}/>
           <Route  path="/programAlto"element={<ProgramAlto />}/>
@@ -35,6 +42,11 @@ export default function App() {
           <Route  path="/potion-create-2"element={<PotionCreate2 />}/>
           <Route  path="/potion-create-result"element={<PotionCreateResult />}/>
           <Route  path="/potion-create-result2"element={<PotionCreateResult2 />}/>
+          <Route  path="/select-tettin1"element={<SelectTettin1 />}/>
+          <Route  path="/select-tettin2"element={<SelectTettin2 />}/>
+          <Route  path="/select-tettin3"element={<SelectTettin3 />}/>
+          <Route  path="/select-tyupei"element={<SelectTyupei />}/>
+          <Route  path="/select-alto"element={<SelectAlto />}/>
           <Route  path="/ending"element={<Ending />}/>
         </Routes>
       </BrowserRouter>

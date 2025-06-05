@@ -1,0 +1,295 @@
+.title-screen-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #FFFFFF;
+  overflow: visible;
+} 
+.title-screen-container.background-visible {
+  background: url('/kodo.jpg') no-repeat center center/cover;
+}
+.logo-container {
+  font-family: "Checkpoint", sans-serif;
+  font-size: 12vw;
+  font-weight: 900;
+  position: relative;
+  white-space: nowrap;
+}
+.logo-char {
+  display: inline-block;
+  position: relative;
+  transform: translateY(0);
+  opacity: 0;
+}
+.char-small-i, .char-small-i-2, .char-sai, .char-m, .char-e, .char-t, .char-a  {
+  color: #7B68EE;
+}
+.logo-container.animate .logo-char {
+  animation: bounceIn 0.5s forwards ease-out;
+}
+.logo-container.animate .char-e { animation-delay: 0.2s; }
+.logo-container.animate .char-small-i { animation-delay: 0.4s; }
+.logo-container.animate .char-t { animation-delay: 0.6s; }
+.logo-container.animate .char-a { animation-delay: 0.8s; }
+.logo-container.animate .char-small-i-2 { animation-delay: 1.0s; }
+.logo-container.animate .char-sai { animation-delay: 1.2s; }
+.logo-container.fade-out {
+  opacity: 0;
+  transition: opacity 0.5s ease-out;
+}
+.start-button {
+  font-family: "Checkpoint", sans-serif;
+  margin-top: 2rem;
+  padding: 1.6rem 4rem;
+  font-size: 2.4rem;
+  background-color: #FFCE74;
+  color: #111;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.start-button:hover {
+  background-color: #eee;
+}
+.start-button-wrapper {
+  position: absolute;
+  bottom: 16vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  z-index: 20;
+}
+.big-logo-wrapper {
+  position: relative;
+  display: inline-block;
+  z-index: 20;
+}
+.big-logo {
+  font-family: "Checkpoint", sans-serif;
+  font-size: 12vw;
+  font-weight: 900;
+  /* 初期opacityを1に変更 → アニメーションが終わったあともfade-out可能に */
+  opacity: 1;
+  /* アニメーションで縮小表示 */
+  animation: shrinkToCenter 0.8s ease-out;
+  animation-fill-mode: forwards;
+  /* アニメーション後のフェードアウトに必要なtransition */
+  transition: opacity 1.5s ease;
+  z-index: 10;
+  white-space: nowrap;
+  position: relative;
+  overflow: hidden;
+}
+.big-logo.visible {
+  opacity: 1;
+}
+.big-logo.animate-in {
+  animation: shrinkToCenter 0.8s ease-out;
+  /* ← animation-fill-mode を削除 */
+}
+/* フェードアウト用クラス（これが発火すればopacity: 0になる） */
+.big-logo.fade-out {
+  opacity: 0;
+}
+.pink {
+  color: #FF69B4;
+  text-shadow: -2px -2px 0 white,
+     2px -2px 0 white,
+    -2px  2px 0 white,
+     2px  2px 0 white,
+     0px -2px 0 white,
+     0px  2px 0 white,
+    -2px  0px 0 white,
+     2px  0px 0 white,
+     10px 10px 1px rgba(0, 0, 0, 0.4);
+}
+.purple {
+  color: #7B68EE;
+  text-shadow: -2px -2px 0 white,
+     2px -2px 0 white,
+    -2px  2px 0 white,
+     2px  2px 0 white,
+     0px -2px 0 white,
+     0px  2px 0 white,
+    -2px  0px 0 white,
+     2px  0px 0 white,
+     10px 10px 1px rgba(0, 0, 0, 0.4);
+}
+.shine-effect {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.6) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: skewX(-20deg);
+  animation: shine 1s ease-out forwards;
+  pointer-events: none;
+  z-index: 20;
+}
+.background-fade-in {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-image: url('/kodo.jpg');
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transform: scale(1);
+  transition: opacity 1.5s ease, transform 1.5s ease;
+  z-index: 0;
+  pointer-events: none;
+}
+.background-fade-in.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+.background-fade-in.fade-out {
+  opacity: 0;
+  transform: scale(1.05);
+}
+@keyframes bounceIn {
+  0% { transform: translateY(-150%); opacity: 0; }
+  60% { transform: translateY(20%); opacity: 1; }
+  80% { transform: translateY(-5%); }
+  100% { transform: translateY(0); opacity: 1; }
+}
+@keyframes shrinkToCenter {
+  0% { transform: scale(2.5); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+@keyframes shine {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+@keyframes float1 {
+  0%   { transform: translate(0, 0); }
+  10%  { transform: translate(40px, -30px); }
+  20%  { transform: translate(-60px, 70px); }
+  30%  { transform: translate(90px, 40px); }
+  40%  { transform: translate(-50px, -60px); }
+  50%  { transform: translate(70px, 100px); }
+  60%  { transform: translate(-90px, 30px); }
+  70%  { transform: translate(60px, -50px); }
+  80%  { transform: translate(-30px, 80px); }
+  90%  { transform: translate(50px, -20px); }
+  100% { transform: translate(0, 0); }
+}
+@keyframes float2 {
+  0%   { transform: translate(0, 0); }
+  10%  { transform: translate(-50px, -80px); }
+  20%  { transform: translate(70px, -60px); }
+  30%  { transform: translate(-110px, 80px); }
+  40%  { transform: translate(60px, -40px); }
+  50%  { transform: translate(-90px, 120px); }
+  60%  { transform: translate(80px, -30px); }
+  70%  { transform: translate(-100px, 90px); }
+  80%  { transform: translate(40px, -100px); }
+  90%  { transform: translate(-60px, 50px); }
+  100% { transform: translate(0, 0); }
+}
+@keyframes float3 {
+  0%   { transform: translate(0, 0); }
+  10%  { transform: translate(-60px, 90px); }
+  20%  { transform: translate(-70px, -80px); }
+  30%  { transform: translate(120px, 60px); }
+  40%  { transform: translate(-80px, 130px); }
+  50%  { transform: translate(90px, -100px); }
+  60%  { transform: translate(-120px, 40px); }
+  70%  { transform: translate(70px, 110px); }
+  80%  { transform: translate(-100px, -90px); }
+  90%  { transform: translate(80px, 70px); }
+  100% { transform: translate(0, 0); }
+}
+.preview-images {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  gap: 2vw;
+  opacity: 0;
+  transition: opacity 1.5s ease;
+  z-index: 5;
+}
+.preview-images.visible {
+  opacity: 1;
+}
+.preview-images.fade-out {
+  opacity: 0;
+}
+.preview-image {
+  width: 20vw;
+  height: auto;
+  position: absolute;
+  border-radius: 0.5vw;
+  animation-duration: 100s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+.preview-image:nth-child(1) {
+  top: 10vh;
+  left: -10vw;
+  animation-name: float1;
+}
+.preview-image:nth-child(2) {
+  top: 45vh;
+  left: -47vw;
+  animation-name: float2;
+}
+.preview-image:nth-child(3) {
+  top: 50vh;
+  left: 30vw;
+  animation-name: float3;
+}
+/* .preview-texts {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 1.5s ease;
+  z-index: 6;
+}
+.preview-texts.visible {
+  opacity: 1;
+}
+.preview-texts.fade-out {
+  opacity: 0;
+}
+.preview-text {
+  position: absolute;
+  font-size: 3vw;
+  font-family: "Checkpoint", sans-serif;
+  font-weight: 900;
+  color: #FFFFFF;
+  text-shadow:
+    -2px -2px 0 #000,
+     2px -2px 0 #000,
+    -2px  2px 0 #000,
+     2px  2px 0 #000;
+  animation: floatText 8s ease-in-out infinite;
+}
+.preview-text-1 {
+  top: 41vh;
+  left: 30vw;
+}
+.preview-text-2 {
+  top: 41vh;
+  right: 44.8vw;
+}
+.preview-text-3 {
+  top: 41vh;
+  left: 66vw;
+} */
