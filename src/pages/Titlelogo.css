@@ -1,4 +1,4 @@
-.title-screen-container {
+/* .title-screen-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -6,7 +6,7 @@
   min-height: 100vh;
   background-color: #FFFFFF;
   overflow: visible;
-} 
+}  */
 .title-screen-container.background-visible {
   background: url('/kodo.jpg') no-repeat center center/cover;
 }
