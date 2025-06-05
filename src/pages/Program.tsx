@@ -1,7 +1,7 @@
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import '../magic-game.css';
-import '../Button-magicgame.css';
+import './css/magic-game.css';
+import './css/Button-magicgame.css';
 
 export const Program = () => {
   const location = useLocation();
@@ -12,9 +12,11 @@ export const Program = () => {
   const name = query.get("name"); // "まっつん"
    // 説明文のリスト
    const descriptions = [
-    "古の錬金術師たちの秘術が詰まったポーションづくり。",
-    "君は見習い錬金術師として、未知の薬の調合に挑む。",
-    "素材を選び、慎重に調合せよ。伝説のポーションを生み出し、歴史に名を刻めるか？",
+    "とある小さな村から、伝説の魔法使いが残した魔導書が見つかった",
+    "そこには現代には無い、強力なポーションの調合方法が記されているという",
+    "君は見習い魔法使いとして、そのポーションを調合することになった",
+    "正しい材料、手順を進めていくことで、ポーションが完成する",
+    "さあ、魔法のポーションを調合しよう！",
   ];
 
   // 現在の説明文のインデックスを管理
@@ -32,13 +34,21 @@ export const Program = () => {
 
   return (
     <div className="program">
-      <NavLink to={{ pathname: "/result", search: `?id=${id}&name=${name}` }}>結果(こちら側を押すと失敗画面へ移動します)</NavLink><br></br>
-      <Link to="/result" state={{ state: ["Success"] }}>
-        結果ページへ(こちら側を押すと成功画面へ移動します)
-      </Link>
-      <h1>プログラミング</h1>
-      <h1>魔法のポーション</h1>
-      <p>{descriptions[currentIndex]}</p> {/* 現在の説明文を表示 */}
+      
+      <h1>魔法のポーション作りゲーム</h1>
+      <p style={{
+        fontFamily: 'Caveat, Yu Mincho, 游明朝, serif, cursive',
+        color: '#5B3A1B',
+        fontSize: '1.5em',
+        fontWeight: 'bold',
+        letterSpacing: '0.05em',
+        margin: '1.5em 0',
+        lineHeight: 1.7,
+        background: 'rgba(255,255,240,0.7)',
+        borderRadius: '12px',
+        padding: '0.7em 1.2em',
+        boxShadow: '0 2px 8px #e0cfa0'
+      }}>{descriptions[currentIndex]}</p> {/* 現在の説明文を表示 */}
       <button className="btn-magicgame" onClick={handleNextDescription}>次へ</button> {/* ボタンを追加 */}
       <div className="background-image-magic">  </div>
     </div>

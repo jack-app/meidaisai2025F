@@ -1,14 +1,14 @@
-import '../grimoire.css';
+import './css/grimoire.css';
 import { useState } from "react";
-import '../potion-images.css';
-import '../potion-puzzlebox.css';
+import './css/potion-images.css';
+import './css/potion-puzzlebox.css';
 import { useNavigate } from "react-router-dom";
 //ボックス内の画像
-import herbImg from '../24841317.jpg';
-import animalImg from '../kegawa.jpg';
-import yellowwaterImg from '../黄色い液体 2025-05-25 225506.png';
-import waterImg from '../26261624.jpg';
-import magicStoneImg from '../magicstoneImg.png';
+import herbImg from '../assets/24841317.jpg';
+import animalImg from '../assets/kegawa.jpg';
+import yellowwaterImg from '../assets/黄色い液体 2025-05-25 225506.png';
+import waterImg from '../assets/26261624.jpg';
+import magicStoneImg from '../assets/magicstoneImg.png';
 export const PotionCreate = () => {
   // 仮のアイテムリスト
   const items = [
@@ -18,6 +18,8 @@ export const PotionCreate = () => {
     { id: 4, name: "水" },
     { id: 5, name: "魔法石" }
   ];
+
+   const [showHint, setShowHint] = useState(true);
 
   // 各ボックスに格納されたアイテムID
   const [boxes, setBoxes] = useState<(number | null)[]>([1, 2, 3, 4, 5]); // 5枠に拡張
@@ -98,6 +100,24 @@ export const PotionCreate = () => {
 
   return (
     <div className="potion-create" style={{ display: "flex", gap: "32px" }}>
+       {/* 追加: 最前面ヒントボタン */}
+      {showHint && (
+        <button
+          style={{
+            border: "2px solid black",
+            fontSize: "1.5em",
+            position: "fixed",
+            top: "50%",
+            left: "50%",
+            transform: "translateX(-50%)",
+            zIndex: 9999,
+          }}
+          onClick={() => setShowHint(false)}
+        >
+          文章を読み解き、適切な材料を選ぼう！<br/>
+                 (説明を閉じる)
+        </button>
+      )}
       {/* 左側に説明テキストを追加 */}
       
         <div>
