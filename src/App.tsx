@@ -17,7 +17,6 @@ import { Firststory } from "./pages/Firststory"; // パスは適宜調整
 
 export default function App() {
   return (
-    <div className="background-image-magic">
     <div className="app">
       <BrowserRouter>
         <ul>
@@ -39,7 +38,6 @@ export default function App() {
           <Route  path="/ending"element={<Ending />}/>
         </Routes>
       </BrowserRouter>
-    </div>
     </div>
   );
 }
