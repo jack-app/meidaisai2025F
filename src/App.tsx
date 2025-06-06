@@ -1,4 +1,5 @@
 // import logo from './logo.svg';
+// import { Checkpoint } from './Checkpoint.otf';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import './App.css';
 import { Pnf } from "./pages/Pnf";
