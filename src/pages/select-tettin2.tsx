@@ -23,17 +23,17 @@ export const SelectTettin2 = () => {
   const storyContent = [
     {
       type: 'dialogue',
-      speaker: 'キャラクターA',
+      speaker: 'まつり',
       text: 'あれれ、弾が遅すぎて敵が倒せないよ！'
     },
     {
       type: 'dialogue',
-      speaker: 'キャラクターB',
+      speaker: 'めいた',
       text: 'クリアできる弾速ってどれくらいなんだろう？'
     },
     {
       type: 'dialogue',
-      speaker: 'キャラクターA',
+      speaker: 'まつり',
       text: '10ミリ秒に一発だと、3回目でクリアできたよ！'
     },
     {
@@ -92,11 +92,11 @@ export const SelectTettin2 = () => {
       {/* キャラクター画像表示エリア */}
       {showCharacters && (
         <div className="characters-container">
-          <div className={`character-left ${activeSpeaker === 'キャラクターA' ? 'active' : 'inactive'}`}>
-            <img src="/girl.png" alt="キャラクターA" />
+          <div className={`character-left ${activeSpeaker === 'めいた' ? 'active' : 'inactive'}`}>
+            <img src="/boy.png" alt="めいた" />
           </div>
-          <div className={`character-right ${activeSpeaker === 'キャラクターB' ? 'active' : 'inactive'}`}>
-            <img src="/boy.png" alt="キャラクターB" />
+          <div className={`character-right ${activeSpeaker === 'まつり' ? 'active' : 'inactive'}`}>
+            <img src="/girl.png" alt="まつり" />
           </div>
         </div>
       )}

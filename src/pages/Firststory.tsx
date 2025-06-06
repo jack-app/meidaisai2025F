@@ -20,17 +20,17 @@ const storyContent = [
   },
   {
     type: 'dialogue',
-    speaker: 'ゲーム内キャラクターA', // 女の子
+    speaker: 'まつり', // 女の子
     text: 'うわぁーん！大変だよ！僕たちの作ったゲームのデータが……データが消えちゃったみたいなんだ！',
   },
   {
     type: 'dialogue',
-    speaker: 'ゲーム内キャラクターB', // 男の子
+    speaker: 'めいた', // 男の子
     text: 'これじゃ、名大祭でみんなに遊んでもらえないよ…。どうしよう…。',
   },
   {
     type: 'dialogue',
-    speaker: 'ゲーム内キャラクターA', // 女の子
+    speaker: 'まつり', // 女の子
     text: 'ねえ、そこのキミ！もしかして、ゲームを作るのを手伝ってくれたりしないかな…？',
   },
   {
@@ -107,11 +107,11 @@ export const Firststory: React.FC = () => {
       {/* キャラクター画像表示エリア */}
       {showCharacters && (
         <div className="characters-container">
-          <div className={`character-left ${activeSpeaker === 'ゲーム内キャラクターA' ? 'active' : 'inactive'}`}>
-            <img src="/girl.png" alt="女の子キャラクター" />
+          <div className={`character-left ${activeSpeaker === 'めいた' ? 'active' : 'inactive'}`}>
+            <img src="/boy.png" alt="めいた" />
           </div>
-          <div className={`character-right ${activeSpeaker === 'ゲーム内キャラクターB' ? 'active' : 'inactive'}`}>
-            <img src="/boy.png" alt="男の子キャラクター" />
+          <div className={`character-right ${activeSpeaker === 'まつり' ? 'active' : 'inactive'}`}>
+            <img src="/girl.png" alt="まつり" />
           </div>
         </div>
       )}

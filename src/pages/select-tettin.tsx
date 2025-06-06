@@ -23,17 +23,17 @@ export const SelectTettin1 = () => {
   const storyContent = [
     {
       type: 'dialogue',
-      speaker: 'キャラクターA',
+      speaker: 'まつり',
       text: 'ちょっと待って！敵に何回当てても倒れないんだけど！？'
     },
     {
       type: 'dialogue',
-      speaker: 'キャラクターB',
+      speaker: 'めいた',
       text: 'ま、まさか…敵が倒れる条件が設定されてないとか…？'
     },
     {
       type: 'dialogue',
-      speaker: 'キャラクターA',
+      speaker: 'まつり',
       text: 'お願い！君が敵が倒れる"HP"の閾値を決めてくれない！？'
     },
     {
@@ -92,11 +92,11 @@ export const SelectTettin1 = () => {
       {/* キャラクター画像表示エリア */}
       {showCharacters && (
         <div className="characters-container">
-          <div className={`character-left ${activeSpeaker === 'キャラクターA' ? 'active' : 'inactive'}`}>
-            <img src="/girl.png" alt="キャラクターA" />
+          <div className={`character-left ${activeSpeaker === 'めいた' ? 'active' : 'inactive'}`}>
+            <img src="/boy.png" alt="めいた" />
           </div>
-          <div className={`character-right ${activeSpeaker === 'キャラクターB' ? 'active' : 'inactive'}`}>
-            <img src="/boy.png" alt="キャラクターB" />
+          <div className={`character-right ${activeSpeaker === 'まつり' ? 'active' : 'inactive'}`}>
+            <img src="/girl.png" alt="まつり" />
           </div>
         </div>
       )}

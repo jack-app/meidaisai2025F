@@ -51,18 +51,18 @@ export const SelectTettin3 = () => {
     <div className="first-story-container">
       {/* キャラクター画像表示エリア */}
       <div className="characters-container">
-        <div className="character-left active">
-          <img src="/girl.png" alt="女の子キャラクター" />
-        </div>
-        <div className="character-right inactive">
+        <div className="character-left inactive">
           <img src="/boy.png" alt="男の子キャラクター" />
+        </div>
+        <div className="character-right active">
+          <img src="/girl.png" alt="女の子キャラクター" />
         </div>
       </div>
 
       <div className="story-box" style={{ textAlign: 'center' }}>
         {step === 0 && (
           <>
-            <div className="speaker-name">キャラクターA</div>
+            <div className="speaker-name">まつり</div>
             <p>最後の仕上げだよ！{labels[colorStage]}を選んでね！</p>
             <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}>
               {colorOptions.map((color) => (
@@ -105,7 +105,7 @@ export const SelectTettin3 = () => {
 
         {step === 1 && (
           <>
-            <div className="speaker-name">キャラクターA</div>
+            <div className="speaker-name">まつり</div>
             <p>🎉 勝利＆敗北メッセージを決めよう！</p>
             <div style={{ marginTop: "15px" }}>
               <label>勝利メッセージ：</label><br />

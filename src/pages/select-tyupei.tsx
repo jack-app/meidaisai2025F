@@ -12,13 +12,13 @@ export const SelectTyupei = () => {
   const name = query.get("name") || "錬金術師見習い";
 
   const storyContent = [
-    { type: 'dialogue', speaker: 'ゲーム内キャラクターA', text: '……ねえ、そこのキミ。' },
-    { type: 'dialogue', speaker: 'ゲーム内キャラクターB', text: 'キミ、どんなゲームを作ろうとしてるの？' },
-    { type: 'dialogue', speaker: 'ゲーム内キャラクターA', text: '魔法？ 戦闘？ それとも……' },
-    { type: 'dialogue', speaker: 'ゲーム内キャラクターB', text: '「ポーションづくりゲーム」って興味ない？' },
-    { type: 'dialogue', speaker: 'ゲーム内キャラクターA', text: 'あの！素材を組み合わせて色んなポーションを錬成するアレですか！？' },
-    { type: 'dialogue', speaker: 'ゲーム内キャラクターB', text: 'そう、それだよ。' },
-    { type: 'dialogue', speaker: 'ゲーム内キャラクターA', text: 'さあ、ポーションづくりゲームを、一緒に作っていこう！' },
+    { type: 'dialogue', speaker: 'まつり', text: '……ねえ、そこのキミ。' },
+    { type: 'dialogue', speaker: 'めいた', text: 'キミ、どんなゲームを作ろうとしてるんだっけ？' },
+    { type: 'dialogue', speaker: 'まつり', text: '魔法？ 戦闘？ それとも……' },
+    { type: 'dialogue', speaker: 'めいた', text: '「ポーションづくりゲーム」って興味ない？' },
+    { type: 'dialogue', speaker: 'まつり', text: 'あの！素材を組み合わせて色んなポーションを錬成するアレですか！？' },
+    { type: 'dialogue', speaker: 'めいた', text: 'そう、それだよ。' },
+    { type: 'dialogue', speaker: 'まつり', text: 'さあ、ポーションづくりゲームを、一緒に作っていこう！' },
     { type: 'narration', speaker: '', text: 'ゲーム作りの第一歩として、まずは素材の選択画面を作ってみよう。' },
   ];
 
@@ -66,11 +66,11 @@ export const SelectTyupei = () => {
       {/* キャラクター画像表示エリア */}
       {showCharacters && (
         <div className="characters-container">
-          <div className={`character-left ${activeSpeaker === 'ゲーム内キャラクターA' ? 'active' : 'inactive'}`}>
-            <img src="/girl.png" alt="女の子キャラクター" />
-          </div>
-          <div className={`character-right ${activeSpeaker === 'ゲーム内キャラクターB' ? 'active' : 'inactive'}`}>
+          <div className={`character-left ${activeSpeaker === 'めいた' ? 'active' : 'inactive'}`}>
             <img src="/boy.png" alt="男の子キャラクター" />
+          </div>
+          <div className={`character-right ${activeSpeaker === 'まつり' ? 'active' : 'inactive'}`}>
+            <img src="/girl.png" alt="女の子キャラクター" />
           </div>
         </div>
       )}
