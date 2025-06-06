@@ -5,30 +5,29 @@
   flex-direction: column;
   justify-content: flex-end; /* キャラクターを上部、テキストボックスを下部に配置 */
   align-items: center;
-  background-color: #2c3e50; /* 暗めの背景色 */
-  color: #ecf0f1; /* 明るめのテキスト色 */
-  font-family: 'Arial', sans-serif; /* フォント指定 */
+  background-color: #2c3e50;
+  color: #ecf0f1;
+  font-family: 'Arial', sans-serif;
   padding: 20px;
   box-sizing: border-box;
-  cursor: pointer; /* クリックで進むことを示唆 */
-  position: relative; /* 子要素のposition: absoluteのため */
-  overflow: hidden; /* キャラクターがはみ出さないように */
+  cursor: pointer;
+  position: relative;
 }
 
 .deleted-screen-bg {
-  background-color: #1a1a1a; /* データ削除画面の背景色 */
-  color: #e74c3c; /* データ削除メッセージの色 */
-  justify-content: center; /* 中央に配置 */
+  background-color: #1a1a1a;
+  color: #e74c3c;
+  justify-content: center;
   text-align: center;
 }
 
 .deleted-message h1 {
-  font-size: 3em; /* 大きめのフォント */
+  font-size: 3em;
   margin-bottom: 20px;
   border: 3px solid #c0392b;
   padding: 20px;
   display: inline-block;
-  animation: blinkWarning 1.5s infinite; /* 点滅アニメーション */
+  animation: blinkWarning 1.5s infinite;
 }
 
 .deleted-message .click-to-proceed {
@@ -42,64 +41,74 @@
 }
 
 /* キャラクター表示エリア */
-.character-display-area {
-  position: absolute; /* 親要素に対して絶対配置 */
-  top: 0; /* 画面上部に配置 */
+.characters-container {
+  position: absolute;
+  top: 0;
   left: 0;
   width: 100%;
-  height: calc(100% - 250px); /* テキストボックスの高さに合わせて調整 (例: 250px) */
+  height: 100%;
   display: flex;
-  justify-content: space-around; /* キャラクターを横並びで均等に配置 */
-  align-items: flex-end; /* キャラクター画像を下に揃える */
-  padding-bottom: 20px; /* テキストボックスとの間に少し隙間 */
-  pointer-events: none; /* キャラクター画像のクリックイベントを無効化し、親のクリックイベントを有効にする */
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 0 2%;
+  pointer-events: none; /* クリックイベントを通す */
+  z-index: 1;
 }
 
-.character-image {
-  max-height: 100%; /* 親要素の高さにフィット */
-  max-width: 45%; /* 2枚並べるので最大幅を調整 */
-  object-fit: contain; /* 画像のアスペクト比を保持 */
-  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out; /* フェードイン/アウトと位置変化のアニメーション */
-  z-index: 1; /* テキストボックスより奥に配置 */
-  /* 個別の位置調整が必要な場合はここに追記 */
+.character-left,
+.character-right {
+  transition: all 0.3s ease;
+  height: 70%;
+  display: flex;
+  align-items: flex-end;
 }
 
-.character-image.left {
-  /* left固有のスタイルがあれば */
+.character-left img,
+.character-right img {
+  max-height: 100%;
+  max-width: 300px;
+  object-fit: contain;
+  transition: filter 0.3s ease;
 }
 
-.character-image.right {
-  /* right固有のスタイルがあれば */
+/* 発言していないキャラクターを暗くする */
+.character-left.inactive img,
+.character-right.inactive img {
+  filter: brightness(0.3) contrast(0.7);
+}
+
+.character-left.active img,
+.character-right.active img {
+  filter: brightness(1) contrast(1);
 }
 
 .story-box {
   width: 80%;
   max-width: 700px;
-  min-height: 200px; /* テキストエリアの最小高さ */
-  background-color: rgba(0, 0, 0, 0.7); /* 半透明の背景を少し濃く */
-  border: 2px solid #3498db; /* 枠線の色 */
+  min-height: 200px;
+  background-color: rgba(0, 0, 0, 0.8); /* 背景を少し濃くして文字を読みやすく */
+  border: 2px solid #3498db;
   border-radius: 10px;
   padding: 25px;
   box-shadow: 0 0 15px rgba(52, 152, 219, 0.7);
   display: flex;
   flex-direction: column;
-  position: relative; /* z-indexを適用するため */
-  z-index: 2; /* キャラクター画像より手前に配置 */
-  margin-bottom: 20px; /* 画面下部との余白 */
+  position: relative;
+  z-index: 2; /* キャラクター画像より前面に */
 }
 
 .speaker-name {
   font-size: 1.2em;
   font-weight: bold;
-  color: #3498db; /* 話者名のハイライト色 */
+  color: #3498db;
   margin-bottom: 15px;
 }
 
 .story-text {
-  font-size: 1.3em; /* テキストのフォントサイズ */
-  line-height: 1.6; /* 行間 */
+  font-size: 1.3em;
+  line-height: 1.6;
   flex-grow: 1;
-  white-space: pre-wrap; /* 改行を保持 */
+  white-space: pre-wrap;
 }
 
 .proceed-indicator {
@@ -108,7 +117,7 @@
   color: #bdc3c7;
   animation: blinkIndicator 1s infinite;
   position: relative;
-  z-index: 2; /* テキストボックスより手前に配置 */
+  z-index: 2;
 }
 
 @keyframes blinkIndicator {
@@ -121,15 +130,31 @@
   padding: 15px 30px;
   font-size: 1.2em;
   color: #fff;
-  background-color: #3498db; /* ボタンの色 */
+  background-color: #3498db;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
   position: relative;
-  z-index: 2; /* テキストボックスより手前に配置 */
+  z-index: 2;
 }
 
 .start-button:hover {
-  background-color: #2980b9; /* ホバー時の色 */
+  background-color: #2980b9;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+  .characters-container {
+    padding: 0 5%;
+  }
+  
+  .character-left img,
+  .character-right img {
+    max-width: 200px;
+  }
+  
+  .story-box {
+    width: 90%;
+  }
 }

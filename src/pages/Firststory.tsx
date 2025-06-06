@@ -36,21 +36,21 @@ const storyContent: StoryStep[] = [
   },
   {
     type: 'dialogue',
-    speaker: 'サークルメンバーA',
+    speaker: 'まつり', // 女の子
     text: 'うわぁーん！大変だよ！僕たちの作ったゲームのデータが……データが消えちゃったみたいなんだ！',
     leftCharacter: '/images/character_member_a_cry.png', // 例: メンバーAの泣き立ち絵
     rightCharacter: '/images/character_member_b_sad.png',
   },
   {
     type: 'dialogue',
-    speaker: 'サークルメンバーB',
+    speaker: 'めいた', // 男の子
     text: 'これじゃ、名大祭でみんなに遊んでもらえないよ…。どうしよう…。',
     leftCharacter: '/images/character_member_a_cry.png',
     rightCharacter: '/images/character_member_b_despair.png', // 例: メンバーBの絶望立ち絵
   },
   {
     type: 'dialogue',
-    speaker: 'サークルメンバーA',
+    speaker: 'まつり', // 女の子
     text: 'ねえ、そこのキミ！もしかして、ゲームを作るのを手伝ってくれたりしないかな…？',
     leftCharacter: '/images/character_member_a_hope.png', // 例: メンバーAの希望立ち絵
     rightCharacter: '/images/character_member_b_normal.png',
@@ -122,27 +122,24 @@ export const Firststory: React.FC = () => {
     );
   }
 
+  // キャラクター画像を表示するかどうか
+  const showCharacters = currentLine?.type === 'dialogue';
+  const activeSpeaker = currentLine?.speaker;
+
   return (
     <div className="first-story-container" onClick={handleNextStep}>
-      {/* 立ち絵表示エリア */}
-      <div className="character-display-area">
-        {currentLine?.leftCharacter && (
-          <img
-            src={currentLine.leftCharacter}
-            alt="Left Character"
-            className="character-image left"
-          />
-        )}
-        {currentLine?.rightCharacter && (
-          <img
-            src={currentLine.rightCharacter}
-            alt="Right Character"
-            className="character-image right"
-          />
-        )}
-      </div>
+      {/* キャラクター画像表示エリア */}
+      {showCharacters && (
+        <div className="characters-container">
+          <div className={`character-left ${activeSpeaker === 'めいた' ? 'active' : 'inactive'}`}>
+            <img src="/boy.png" alt="めいた" />
+          </div>
+          <div className={`character-right ${activeSpeaker === 'まつり' ? 'active' : 'inactive'}`}>
+            <img src="/girl.png" alt="まつり" />
+          </div>
+        </div>
+      )}
 
-      {/* ストーリーテキストボックス */}
       <div className="story-box">
         {currentLine?.speaker && <div className="speaker-name">{currentLine.speaker}</div>}
         <div className="story-text">
@@ -151,9 +148,11 @@ export const Firststory: React.FC = () => {
             : currentLine?.text}
         </div>
       </div>
+      
       {isTextFullyDisplayed && currentStep < storyContent.length - 1 && (
         <div className="proceed-indicator">▼ クリックして進む</div>
       )}
+      
       {isTextFullyDisplayed && currentStep === storyContent.length - 1 && (
         <button className="start-button" onClick={handleNextStep}>
           ゲーム作りを手伝う！
