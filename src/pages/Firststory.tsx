@@ -2,8 +2,20 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Firststory.css';
 
-// 表示するストーリーの各ステップを定義
-const storyContent = [
+// キャラクター画像の定義
+interface CharacterImages {
+  leftCharacter?: string; // 左側のキャラクター画像のパス (例: '/images/characterA.png')
+  rightCharacter?: string; // 右側のキャラクター画像のパス (例: '/images/characterB.png')
+}
+
+// ストーリーの各ステップの型定義を拡張
+interface StoryStep extends CharacterImages {
+  type: 'deleted_screen' | 'narration' | 'dialogue';
+  speaker?: string;
+  text: string;
+}
+
+const storyContent: StoryStep[] = [
   {
     type: 'deleted_screen',
     text: 'データは削除されました',
@@ -12,31 +24,43 @@ const storyContent = [
     type: 'narration',
     speaker: '',
     text: '名大祭当日。ゲーム画面には、なぜか「データは削除されました」の文字が——！？',
+    leftCharacter: '/images/character_member_a_normal.png', // 例: メンバーAの通常立ち絵
+    rightCharacter: '/images/character_member_b_normal.png', // 例: メンバーBの通常立ち絵
   },
   {
     type: 'narration',
     speaker: '',
     text: '突然のトラブルに困惑するサークルメンバーたち。このままでは展示が台無しに！',
+    leftCharacter: '/images/character_member_a_confused.png', // 例: メンバーAの困惑立ち絵
+    rightCharacter: '/images/character_member_b_sad.png', // 例: メンバーBの悲しい立ち絵
   },
   {
     type: 'dialogue',
     speaker: 'まつり', // 女の子
     text: 'うわぁーん！大変だよ！僕たちの作ったゲームのデータが……データが消えちゃったみたいなんだ！',
+    leftCharacter: '/images/character_member_a_cry.png', // 例: メンバーAの泣き立ち絵
+    rightCharacter: '/images/character_member_b_sad.png',
   },
   {
     type: 'dialogue',
     speaker: 'めいた', // 男の子
     text: 'これじゃ、名大祭でみんなに遊んでもらえないよ…。どうしよう…。',
+    leftCharacter: '/images/character_member_a_cry.png',
+    rightCharacter: '/images/character_member_b_despair.png', // 例: メンバーBの絶望立ち絵
   },
   {
     type: 'dialogue',
     speaker: 'まつり', // 女の子
     text: 'ねえ、そこのキミ！もしかして、ゲームを作るのを手伝ってくれたりしないかな…？',
+    leftCharacter: '/images/character_member_a_hope.png', // 例: メンバーAの希望立ち絵
+    rightCharacter: '/images/character_member_b_normal.png',
   },
   {
     type: 'narration',
     speaker: '',
     text: 'ゲーム作りを手伝ってくれませんか？',
+    leftCharacter: '/images/character_member_a_normal.png',
+    rightCharacter: '/images/character_member_b_normal.png',
   },
 ];
 

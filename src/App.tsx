@@ -21,6 +21,7 @@ import { SelectTettin3 } from "./pages/select-tettin3";
 import { SelectTyupei } from "./pages/select-tyupei";
 import { SelectAlto } from "./pages/select-alto";
 import Titlelogo from "./pages/Titlelogo";
+import TitleScreen from "./pages/TitleScreen"; // パスは適宜調整
 
 export default function App() {
   return (
