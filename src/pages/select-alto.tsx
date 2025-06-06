@@ -9,41 +9,41 @@ export const SelectAlto = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const query = new URLSearchParams(location.search);
-  const name = query.get("name") || "あると";
+  const name = query.get("name") || "まつり";
 
   const storyContent = [
     {
-      speaker: "あると",
+      speaker: "まつり",
       type: "dialogue",
       text: "うーん…どんなゲームを作ろうとしているんだっけ…"
     },
     {
-      speaker: "君",
+      speaker: "めいた",
       type: "dialogue",
       text: "じゃあ、ちょっと変わったミニゲームを考えてみるとか？"
     },
     {
-      speaker: "あると",
+      speaker: "まつり",
       type: "dialogue",
       text: "たとえば…何があるかな？"
     },
     {
-      speaker: "君",
+      speaker: "めいた",
       type: "dialogue",
       text: "「ののじ」を探すゲームとかは？"
     },
     {
-      speaker: "あると",
+      speaker: "まつり",
       type: "dialogue",
-      text: "ののじ！？あの平仮名の“の”をふたつ並べたアレ！？"
+      text: "ののじ！？あの平仮名の「の」をふたつ並べたアレ！？"
     },
     {
-      speaker: "君",
+      speaker: "めいた",
       type: "dialogue",
       text: "そう！文章の中に紛れてる「ののじ」をいち早く見つけるスピード勝負！"
     },
     {
-      speaker: "あると",
+      speaker: "まつり",
       type: "dialogue",
       text: "…めっちゃ面白そうじゃん！よし、「ののじ探しゲーム」作ってみよう！"
     }
@@ -86,8 +86,24 @@ export const SelectAlto = () => {
     }
   };
 
+  // キャラクター画像を表示するかどうか
+  const showCharacters = currentLine?.type === 'dialogue';
+  const activeSpeaker = currentLine?.speaker;
+
   return (
     <div className="first-story-container" onClick={handleNext}>
+      {/* キャラクター画像表示エリア */}
+      {showCharacters && (
+        <div className="characters-container">
+          <div className={`character-left ${activeSpeaker === 'めいた' ? 'active' : 'inactive'}`}>
+            <img src="/boy.png" alt="めいたキャラクター" />
+          </div>
+                    <div className={`character-right ${activeSpeaker === 'まつり' ? 'active' : 'inactive'}`}>
+            <img src="/girl.png" alt="まつりキャラクター" />
+          </div>
+        </div>
+      )}
+
       <div className="story-box">
         {currentLine?.speaker && <div className="speaker-name">{currentLine.speaker}</div>}
         <div className="story-text">{displayedText}</div>

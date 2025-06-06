@@ -23,17 +23,17 @@ export const SelectTettin1 = () => {
   const storyContent = [
     {
       type: 'dialogue',
-      speaker: 'キャラクターA',
+      speaker: 'まつり',
       text: 'ちょっと待って！敵に何回当てても倒れないんだけど！？'
     },
     {
       type: 'dialogue',
-      speaker: 'キャラクターB',
+      speaker: 'めいた',
       text: 'ま、まさか…敵が倒れる条件が設定されてないとか…？'
     },
     {
       type: 'dialogue',
-      speaker: 'キャラクターA',
+      speaker: 'まつり',
       text: 'お願い！君が敵が倒れる"HP"の閾値を決めてくれない！？'
     },
     {
@@ -83,44 +83,59 @@ export const SelectTettin1 = () => {
     }
   };
 
+  // キャラクター画像を表示するかどうか
+  const showCharacters = currentLine?.type === 'dialogue';
+  const activeSpeaker = currentLine?.speaker;
+
   return (
     <div className="first-story-container">
-  <div className="story-box">
-    {currentLine?.speaker && <div className="speaker-name">{currentLine.speaker}</div>}
-    <div className="story-text">
-      {(currentLine?.type === 'dialogue' || currentLine?.type === 'narration')
-        ? displayedText
-        : currentLine?.text}
-    </div>
+      {/* キャラクター画像表示エリア */}
+      {showCharacters && (
+        <div className="characters-container">
+          <div className={`character-left ${activeSpeaker === 'めいた' ? 'active' : 'inactive'}`}>
+            <img src="/boy.png" alt="めいた" />
+          </div>
+          <div className={`character-right ${activeSpeaker === 'まつり' ? 'active' : 'inactive'}`}>
+            <img src="/girl.png" alt="まつり" />
+          </div>
+        </div>
+      )}
 
-    {isTextFullyDisplayed && currentStep === storyContent.length - 1 && (
-      <div style={{ marginTop: '20px' }}>
-        <label htmlFor="die-input">敵が倒れるHPを入力（例: -10〜1000）</label><br />
-        <input
-          id="die-input"
-          type="number"
-          value={die}
-          onChange={(e) => setDie(e.target.value)}
-          style={{ fontSize: "1.2em", padding: "10px", marginTop: "10px", width: "200px" }}
-        />
+      <div className="story-box">
+        {currentLine?.speaker && <div className="speaker-name">{currentLine.speaker}</div>}
+        <div className="story-text">
+          {(currentLine?.type === 'dialogue' || currentLine?.type === 'narration')
+            ? displayedText
+            : currentLine?.text}
+        </div>
+
+        {isTextFullyDisplayed && currentStep === storyContent.length - 1 && (
+          <div style={{ marginTop: '20px' }}>
+            <label htmlFor="die-input">敵が倒れるHPを入力（例: -10〜1000）</label><br />
+            <input
+              id="die-input"
+              type="number"
+              value={die}
+              onChange={(e) => setDie(e.target.value)}
+              style={{ fontSize: "1.2em", padding: "10px", marginTop: "10px", width: "200px" }}
+            />
+          </div>
+        )}
       </div>
-    )}
-  </div>
 
-  {/* ▼ クリックで進む のみがステップ制御を担う */}
-  {isTextFullyDisplayed && currentStep < storyContent.length - 1 && (
-    <div className="proceed-indicator" onClick={handleNextStep}>
-      ▼ クリックして進む
+      {/* ▼ クリックで進む のみがステップ制御を担う */}
+      {isTextFullyDisplayed && currentStep < storyContent.length - 1 && (
+        <div className="proceed-indicator" onClick={handleNextStep}>
+          ▼ クリックして進む
+        </div>
+      )}
+
+      {/* 入力されていれば進める */}
+      {isTextFullyDisplayed && currentStep === storyContent.length - 1 && die !== "" && (
+        <button className="start-button" onClick={handleNextStep}>
+          設定して第二段階へ！
+        </button>
+      )}
     </div>
-  )}
-
-  {/* 入力されていれば進める */}
-  {isTextFullyDisplayed && currentStep === storyContent.length - 1 && die !== "" && (
-    <button className="start-button" onClick={handleNextStep}>
-      設定して第二段階へ！
-    </button>
-  )}
-</div>
-
   );
 };
