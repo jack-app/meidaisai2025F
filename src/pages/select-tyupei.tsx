@@ -12,13 +12,13 @@ export const SelectTyupei = () => {
   const name = query.get("name") || "錬金術師見習い";
 
   const storyContent = [
-    { type: 'dialogue', speaker: '？？？', text: '……ねえ、そこのキミ。' },
-    { type: 'dialogue', speaker: '？？？', text: 'キミ、どんなゲームを作ろうとしてるの？' },
-    { type: 'dialogue', speaker: '？？？', text: '魔法？ 戦闘？ それとも……' },
-    { type: 'dialogue', speaker: '？？？', text: '「ポーションづくりゲーム」って興味ない？' },
-    { type: 'dialogue', speaker: '助手クロウ', text: 'あの！素材を組み合わせて色んなポーションを錬成するアレですか！？' },
-    { type: 'dialogue', speaker: '？？？', text: 'そう、それだよ。' },
-    { type: 'dialogue', speaker: '錬金術師ルナ', text: 'さあ、ポーションづくりゲームを、一緒に作っていこう！' },
+    { type: 'dialogue', speaker: 'ゲーム内キャラクターA', text: '……ねえ、そこのキミ。' },
+    { type: 'dialogue', speaker: 'ゲーム内キャラクターB', text: 'キミ、どんなゲームを作ろうとしてるの？' },
+    { type: 'dialogue', speaker: 'ゲーム内キャラクターA', text: '魔法？ 戦闘？ それとも……' },
+    { type: 'dialogue', speaker: 'ゲーム内キャラクターB', text: '「ポーションづくりゲーム」って興味ない？' },
+    { type: 'dialogue', speaker: 'ゲーム内キャラクターA', text: 'あの！素材を組み合わせて色んなポーションを錬成するアレですか！？' },
+    { type: 'dialogue', speaker: 'ゲーム内キャラクターB', text: 'そう、それだよ。' },
+    { type: 'dialogue', speaker: 'ゲーム内キャラクターA', text: 'さあ、ポーションづくりゲームを、一緒に作っていこう！' },
     { type: 'narration', speaker: '', text: 'ゲーム作りの第一歩として、まずは素材の選択画面を作ってみよう。' },
   ];
 
@@ -44,16 +44,37 @@ export const SelectTyupei = () => {
 
   const handleNextStep = () => {
     if (currentStep < storyContent.length - 1) {
-      setCurrentStep(currentStep + 1);
-      setDisplayedText('');
-      setIsTextFullyDisplayed(false);
-    } else { 
+      if (isTextFullyDisplayed) {
+        setCurrentStep(currentStep + 1);
+        setDisplayedText('');
+        setIsTextFullyDisplayed(false);
+      } else {
+        setDisplayedText(currentLine.text);
+        setIsTextFullyDisplayed(true);
+      }
+    } else {
       navigate(`/program?id=me&name=${name}`);
     }
   };
 
+  // キャラクター画像を表示するかどうか
+  const showCharacters = currentLine?.type === 'dialogue';
+  const activeSpeaker = currentLine?.speaker;
+
   return (
-    <div className="first-story-container">
+    <div className="first-story-container" onClick={handleNextStep}>
+      {/* キャラクター画像表示エリア */}
+      {showCharacters && (
+        <div className="characters-container">
+          <div className={`character-left ${activeSpeaker === 'ゲーム内キャラクターA' ? 'active' : 'inactive'}`}>
+            <img src="/girl.png" alt="女の子キャラクター" />
+          </div>
+          <div className={`character-right ${activeSpeaker === 'ゲーム内キャラクターB' ? 'active' : 'inactive'}`}>
+            <img src="/boy.png" alt="男の子キャラクター" />
+          </div>
+        </div>
+      )}
+
       <div className="story-box">
         {currentLine?.speaker && <div className="speaker-name">{currentLine.speaker}</div>}
         <div className="story-text">
@@ -61,13 +82,17 @@ export const SelectTyupei = () => {
             ? displayedText
             : currentLine?.text}
         </div>
-
-        {isTextFullyDisplayed && (
-          <div className="proceed-indicator" onClick={handleNextStep}>
-            ▼ クリックして進む
-          </div>
-        )}
       </div>
+
+      {isTextFullyDisplayed && currentStep < storyContent.length - 1 && (
+        <div className="proceed-indicator">▼ クリックして進む</div>
+      )}
+
+      {isTextFullyDisplayed && currentStep === storyContent.length - 1 && (
+        <button className="start-button" onClick={handleNextStep}>
+          ポーションゲームを作る！
+        </button>
+      )}
     </div>
   );
 };

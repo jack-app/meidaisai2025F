@@ -49,10 +49,20 @@ export const SelectTettin3 = () => {
 
   return (
     <div className="first-story-container">
+      {/* キャラクター画像表示エリア */}
+      <div className="characters-container">
+        <div className="character-left active">
+          <img src="/girl.png" alt="女の子キャラクター" />
+        </div>
+        <div className="character-right inactive">
+          <img src="/boy.png" alt="男の子キャラクター" />
+        </div>
+      </div>
+
       <div className="story-box" style={{ textAlign: 'center' }}>
         {step === 0 && (
           <>
-            <h2>キャラクターA</h2>
+            <div className="speaker-name">キャラクターA</div>
             <p>最後の仕上げだよ！{labels[colorStage]}を選んでね！</p>
             <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}>
               {colorOptions.map((color) => (
@@ -61,27 +71,27 @@ export const SelectTettin3 = () => {
                   onClick={() => handleColorSelect(color)}
                   style={{
                     backgroundColor: color,
-                  color: color === "black" ? "white" : "black",
-                  margin: "5px",
-                  padding: "10px 20px",
-                  border:
-                    (colorStage === 0 && player === color) ||
-                    (colorStage === 1 && enemy === color) ||
-                    (colorStage === 2 && beam === color) ||
-                    (colorStage === 3 && back === color)
-                      ? "4px solid white"
-                      : "2px solid transparent",
-                  boxShadow:
-                    (colorStage === 0 && player === color) ||
-                    (colorStage === 1 && enemy === color) ||
-                    (colorStage === 2 && beam === color) ||
-                    (colorStage === 3 && back === color)
-                      ? "0 0 10px 2px white"
-                      : "none",
-                  borderRadius: "5px",
-                  fontWeight: "bold",
-                  minWidth: "80px"
-                                  }}
+                    color: color === "black" ? "white" : "black",
+                    margin: "5px",
+                    padding: "10px 20px",
+                    border:
+                      (colorStage === 0 && player === color) ||
+                      (colorStage === 1 && enemy === color) ||
+                      (colorStage === 2 && beam === color) ||
+                      (colorStage === 3 && back === color)
+                        ? "4px solid white"
+                        : "2px solid transparent",
+                    boxShadow:
+                      (colorStage === 0 && player === color) ||
+                      (colorStage === 1 && enemy === color) ||
+                      (colorStage === 2 && beam === color) ||
+                      (colorStage === 3 && back === color)
+                        ? "0 0 10px 2px white"
+                        : "none",
+                    borderRadius: "5px",
+                    fontWeight: "bold",
+                    minWidth: "80px"
+                  }}
                 >
                   {color}
                 </button>
@@ -95,7 +105,8 @@ export const SelectTettin3 = () => {
 
         {step === 1 && (
           <>
-            <h2>🎉 勝利＆敗北メッセージを決めよう！</h2>
+            <div className="speaker-name">キャラクターA</div>
+            <p>🎉 勝利＆敗北メッセージを決めよう！</p>
             <div style={{ marginTop: "15px" }}>
               <label>勝利メッセージ：</label><br />
               <input

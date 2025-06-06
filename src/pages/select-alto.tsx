@@ -35,7 +35,7 @@ export const SelectAlto = () => {
     {
       speaker: "あると",
       type: "dialogue",
-      text: "ののじ！？あの平仮名の“の”をふたつ並べたアレ！？"
+      text: "ののじ！？あの平仮名の「の」をふたつ並べたアレ！？"
     },
     {
       speaker: "君",
@@ -86,8 +86,24 @@ export const SelectAlto = () => {
     }
   };
 
+  // キャラクター画像を表示するかどうか
+  const showCharacters = currentLine?.type === 'dialogue';
+  const activeSpeaker = currentLine?.speaker;
+
   return (
     <div className="first-story-container" onClick={handleNext}>
+      {/* キャラクター画像表示エリア */}
+      {showCharacters && (
+        <div className="characters-container">
+          <div className={`character-left ${activeSpeaker === 'あると' ? 'active' : 'inactive'}`}>
+            <img src="/girl.png" alt="あるとキャラクター" />
+          </div>
+          <div className={`character-right ${activeSpeaker === '君' ? 'active' : 'inactive'}`}>
+            <img src="/boy.png" alt="君キャラクター" />
+          </div>
+        </div>
+      )}
+
       <div className="story-box">
         {currentLine?.speaker && <div className="speaker-name">{currentLine.speaker}</div>}
         <div className="story-text">{displayedText}</div>
