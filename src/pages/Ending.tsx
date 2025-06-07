@@ -33,7 +33,7 @@ export const Ending = () => {
           transform: "translateX(-50%)",
           zIndex: 10,
         }}
-        onClick={() => navigate("/select")}
+        onClick={() => navigate("/")}
       >
         ゲーム選択へ
       </button>
